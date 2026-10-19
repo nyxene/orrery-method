@@ -1,0 +1,49 @@
+<svg viewBox="0 0 700 268">
+  <!-- Release: membership, not parentage — drawn as an enclosure that owns nothing -->
+  <rect x="4" y="16" width="404" height="150" rx="10" fill="none"
+        stroke="var(--faint)" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <text x="18" y="36" font-size="10.5" fill="var(--faint)" letter-spacing="1.4">RELEASE — ЧЛЕНСТВО, НЕ РОДИТЕЛЬСТВО</text>
+
+  <!-- Feature -->
+  <rect x="26" y="52" width="150" height="44" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.4"/>
+  <text x="101" y="72" font-size="13" font-weight="550" fill="var(--ink)" text-anchor="middle">Feature</text>
+  <text x="101" y="87" font-size="10" fill="var(--faint)" text-anchor="middle">владеет tasks</text>
+
+  <!-- Tasks -->
+  <g fill="none" stroke="var(--soft)" stroke-width="1.4">
+    <rect x="242" y="46" width="146" height="30" rx="8"/>
+    <rect x="242" y="86" width="146" height="30" rx="8"/>
+    <rect x="242" y="126" width="146" height="30" rx="8"/>
+  </g>
+  <g font-size="12" fill="var(--ink)" text-anchor="middle">
+    <text x="315" y="66">Task</text><text x="315" y="106">Task</text><text x="315" y="146">Task</text>
+  </g>
+
+  <!-- containment -->
+  <g stroke="var(--line2)" stroke-width="1.3" fill="none">
+    <path d="M176 74 H210 V61 H242"/>
+    <path d="M210 74 V101 H242"/>
+    <path d="M210 74 V141 H242"/>
+  </g>
+
+  <!-- the floor -->
+  <line x1="26" y1="182" x2="388" y2="182" stroke="var(--line2)" stroke-width="1" stroke-dasharray="2 4"/>
+  <text x="207" y="198" font-size="10" fill="var(--faint)" text-anchor="middle">ниже task не стоит ничего</text>
+
+  <!-- Flat items: no parent, found by query -->
+  <rect x="452" y="46" width="244" height="110" rx="10" fill="none" stroke="var(--amber)" stroke-width="1.4"/>
+  <text x="574" y="68" font-size="13" font-weight="550" fill="var(--ink)" text-anchor="middle">Flat items</text>
+  <text x="574" y="84" font-size="10" fill="var(--faint)" text-anchor="middle">без родителя · находится запросом</text>
+  <g font-size="11" fill="var(--dim)" text-anchor="middle">
+    <text x="510" y="110">bug</text><text x="574" y="110">chore</text><text x="644" y="110">docs</text>
+    <text x="574" y="134">research</text>
+  </g>
+
+  <text x="574" y="198" font-size="9.5" fill="var(--faint)" text-anchor="middle">входят в release, только если он без них не отгрузится</text>
+
+  <!-- the count -->
+  <g font-size="10.5" fill="var(--faint)">
+    <text x="26" y="240" letter-spacing="1.4">ДВА ЖИВЫХ УРОВНЯ</text>
+    <text x="26" y="256" fill="var(--dim)">Feature и её tasks. Releases стоят выше как членство; ниже не стоит ничего.</text>
+  </g>
+</svg>

@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapping — Orrery Method</title>
+<meta name="description" content="The method's objects are not platform features, so they survive a change of tracker. A binding says which native primitive carries each one — and what it deliberately leaves unused.">
+<meta property="og:title" content="Mapping — Orrery Method">
+<meta property="og:description" content="The method's objects are not platform features, so they survive a change of tracker. A binding says which native primitive carries each one — and what it deliberately leaves unused.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Orrery Method">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+/* Orrery Method — design tokens and components.
+   Any visual change starts here, never in the generated pages: the site is a
+   rendering, and editing a rendering is the two-sources failure this corpus
+   exists to prevent. */
+
+:root{
+  --bg:#08090A; --panel:#0E0F11; --panel2:#141517; --line:#1F2023; --line2:#2A2C30;
+  --ink:#F7F8F8; --dim:#9CA1A8; --faint:#62666D;
+  --accent:#5E6AD2; --soft:#7B85DE; --good:#4CB782; --amber:#D4A72C; --teal:#4EA8C9; --rose:#E0698C;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#FCFCFD; --panel:#FFF; --panel2:#F4F5F8; --line:#E4E6EA; --line2:#D3D6DB;
+    --ink:#0D0E10; --dim:#5A5F68; --faint:#8A8F98;
+    --soft:#4954C4; --good:#2F8F63; --amber:#A67C11; --teal:#2E7E9B; --rose:#B94A6B;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#FCFCFD; --panel:#FFF; --panel2:#F4F5F8; --line:#E4E6EA; --line2:#D3D6DB;
+  --ink:#0D0E10; --dim:#5A5F68; --faint:#8A8F98;
+  --soft:#4954C4; --good:#2F8F63; --amber:#A67C11; --teal:#2E7E9B; --rose:#B94A6B;
+}
+:root[data-theme="dark"]{
+  --bg:#08090A; --panel:#0E0F11; --panel2:#141517; --line:#1F2023; --line2:#2A2C30;
+  --ink:#F7F8F8; --dim:#9CA1A8; --faint:#62666D;
+  --soft:#7B85DE; --good:#4CB782; --amber:#D4A72C; --teal:#4EA8C9; --rose:#E0698C;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important} }
+
+body{margin:0;background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.7;
+     font-family:"Inter var","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+     letter-spacing:-.008em;-webkit-font-smoothing:antialiased}
+
+/* ---------- frame ---------- */
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0}
+@media(max-width:900px){.shell{grid-template-columns:1fr}}
+main{max-width:960px;padding:40px 48px 96px}
+main.title{padding:64px 48px 120px;margin:0 auto}
+@media(max-width:700px){main,main.title{padding:32px 24px 80px}}
+
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:34px 20px 40px 28px;border-right:1px solid var(--line)}
+@media(max-width:900px){nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}}
+.brand{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.brand .sp{flex:1}
+.brand a.home{display:flex;align-items:center;gap:9px;color:var(--ink);text-decoration:none;padding:0;margin:0;background:none;box-shadow:none}
+.mark{width:22px;height:22px;flex:none;color:var(--accent);display:block}
+.mark svg{width:100%;height:100%;display:block}
+.brand b{font-size:14px;font-weight:600;letter-spacing:-.01em}
+/* The slogan rides beside the name on every page: a reader landing mid-corpus
+   still learns what this is. It yields first when the row runs out of width. */
+.brand .slogan{
+  font-size:11.5px;color:var(--faint);letter-spacing:.02em;
+  padding-left:9px;margin-left:2px;border-left:1px solid var(--line2);
+  white-space:nowrap;
+}
+@media (max-width:640px){.brand .slogan{display:none}}
+.slogan-lg{
+  font-size:15px;color:var(--accent);letter-spacing:.03em;
+  margin:-6px 0 22px;font-weight:500;
+}
+.iconbtn{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex:none;
+         padding:0;margin:0;border:none;border-radius:6px;background:none;color:var(--faint);cursor:pointer;box-shadow:none}
+.iconbtn:hover{color:var(--ink);background:var(--panel2)}
+.iconbtn svg{width:15px;height:15px;display:block;margin:auto}
+a.iconbtn svg{width:14px;height:14px}
+/* Sits at the far end of the control row. It used to be indented to line up
+   under the name, which stopped meaning anything once the controls wrapped onto
+   their own line — the indent then read as a stray element rather than an
+   alignment. */
+.ver{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);
+     letter-spacing:.04em;margin:0 0 0 auto;align-self:center}
+
+/* One of the icon buttons, not a form field. The globe is the whole control;
+   the native select lies transparent over it, so any number of locales still
+   opens as a real menu and keyboard access is the platform's. */
+.langsel{position:relative;cursor:pointer;width:auto;gap:5px;padding:0 7px}
+.langsel svg{width:14px;height:14px;display:block;flex:none}
+/* Which locale is showing, said rather than implied — a globe alone asks the
+   reader to guess, and on a translated page that guess is the whole question. */
+.langsel .lc{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;
+         letter-spacing:.06em;line-height:1;font-weight:500}
+.langsel select{position:absolute;inset:0;width:100%;height:100%;
+         opacity:0;cursor:pointer;border:none;appearance:none;-webkit-appearance:none}
+.langsel:hover{color:var(--ink);background:var(--panel2)}
+.langsel:focus-within{color:var(--ink);outline:2px solid var(--accent);outline-offset:2px}
+
+/* The sidebar is a narrow column: the same brand row that fits the title page
+   breaks the name onto two lines there and clips the slogan. In the sidebar the
+   name keeps the first line to itself and the controls wrap beneath it; the
+   slogan stays on the title page and in every page footer, where there is room. */
+nav .brand{flex-wrap:wrap}
+nav .brand .slogan{display:none}
+nav .brand b{white-space:nowrap}
+nav .brand .sp{flex:0 0 100%;height:0;margin:0}
+nav .brand .langsel,nav .brand .iconbtn,nav .brand .ver{margin-top:10px}
+nav .brand{margin-bottom:22px}
+
+nav .g{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em;
+       text-transform:uppercase;color:var(--faint);padding:18px 10px 6px}
+nav a{display:flex;align-items:baseline;gap:8px;padding:5px 10px;margin:1px 0;border-radius:6px;
+      color:var(--dim);text-decoration:none;font-size:13.5px;transition:color .12s,background .12s}
+nav a:hover{color:var(--ink);background:var(--panel2)}
+nav a.on{color:var(--ink);background:var(--panel2);box-shadow:inset 2px 0 0 var(--accent)}
+nav a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+nav a .n, nav span.planned .n{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);width:14px;flex:none}
+nav span.planned{display:flex;align-items:baseline;gap:8px;padding:5px 10px;margin:1px 0;font-size:13.5px;color:var(--line2)}
+nav .secs{margin:2px 0 4px 17px;border-left:1px solid var(--line);padding-left:2px}
+nav .secs a{font-size:12.5px;padding:3px 10px;color:var(--faint)}
+nav .secs a:hover{color:var(--ink)}
+nav .secs a.on{box-shadow:none;background:none;color:var(--ink)}
+
+/* ---------- document header ---------- */
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:var(--faint);margin-bottom:8px}
+.crumb a{color:var(--dim);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:ui-monospace,Menlo,monospace;
+      font-size:11px;letter-spacing:.06em;color:var(--faint);
+      padding-bottom:26px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.meta b{color:var(--dim);font-weight:400}
+/* A lagging translation says so on its own face; silence would assert currency. */
+.meta .behind{color:var(--amber)}
+.meta .behind b{color:var(--amber);font-weight:500}
+.num{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:var(--accent);margin-bottom:12px}
+
+/* ---------- type ---------- */
+h1{font-size:42px;line-height:1.08;letter-spacing:-.032em;font-weight:600;margin:0 0 18px;text-wrap:balance}
+main.title h1{font-size:52px;line-height:1.05;letter-spacing:-.035em;margin-top:40px}
+h2{font-size:25px;line-height:1.25;letter-spacing:-.022em;font-weight:600;margin:0 0 14px;text-wrap:balance;
+   padding-top:44px;margin-top:36px;border-top:1px solid var(--line)}
+h3{font-size:16px;letter-spacing:-.012em;font-weight:600;margin:0 0 6px}
+p{margin:0 0 17px;color:var(--dim)}
+.lead{font-size:19px;line-height:1.6;color:var(--ink);letter-spacing:-.014em;margin:0 0 16px}
+main.title .lead{font-size:20px;letter-spacing:-.015em;margin-bottom:18px}
+strong{color:var(--ink);font-weight:550}
+hr{border:0;border-top:1px solid var(--line);margin:48px 0}
+ul,ol{margin:0 0 17px;padding-left:20px;color:var(--dim)}
+li{margin-bottom:5px}
+a{color:var(--soft)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.87em;background:var(--panel2);padding:.12em .4em;border-radius:4px;color:var(--ink)}
+
+/* ---------- normativity tier badge ---------- */
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;
+      letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid var(--line2);
+      color:var(--dim);vertical-align:4px;margin-left:10px}
+.tier.rule{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.tier.principle{color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+/* Standing rides beside force and never replaces it: Pending is the absence of
+   this badge, so the corpus's default state costs no ink and cannot go stale. */
+.standing{display:inline-block;vertical-align:middle;margin-left:6px;
+          font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.1em;
+          text-transform:uppercase;padding:2px 7px;border-radius:4px;
+          color:var(--good);border:1px solid color-mix(in srgb,var(--good) 45%,transparent)}
+.tier.guide{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 40%,transparent)}
+
+/* ---------- cards ---------- */
+.band{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--faint);margin:26px 0 10px}
+.cards{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:26px 0}
+.c{border:1px solid var(--line);border-radius:11px;padding:18px 19px;background:var(--panel);display:flex;flex-direction:column;gap:9px}
+.c .tag{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.c p{font-size:14.5px;margin:0;line-height:1.6}
+.c .foot{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+
+/* ---------- skeleton chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0}
+.chip{display:flex;align-items:baseline;gap:8px;padding:10px 16px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}
+.chip b{font-size:19px;font-weight:600;letter-spacing:-.02em}
+.chip span{font-size:13.5px;color:var(--dim)}
+
+/* ---------- tables ---------- */
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:22px 0;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--dim)}
+th{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:400}
+td:first-child{color:var(--ink);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+.wrap{overflow-x:auto}
+.wrap table{min-width:520px}
+
+/* ---------- figures ---------- */
+figure{margin:28px 0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{color:var(--faint);font-size:13.5px;margin-top:12px}
+
+/* ---------- rationale and exception ---------- */
+.why{border-left:2px solid var(--accent);padding:2px 0 2px 18px;margin:24px 0}
+.why .lbl{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.why p{margin:0;color:var(--ink);font-size:15px;line-height:1.65}
+.why p+p{margin-top:10px}
+.exc{border-left:2px solid var(--amber);padding:2px 0 2px 18px;margin:24px 0}
+.exc .lbl{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.exc p{margin:0;color:var(--ink);font-size:15px;line-height:1.65}
+
+/* ---------- numbered specification card ---------- */
+.spec{border:1px solid var(--line);border-radius:11px;background:var(--panel);overflow:hidden;margin:24px 0}
+.spec .hd{padding:11px 18px;border-bottom:1px solid var(--line);background:var(--panel2);
+          font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.spec ol{margin:0;padding:14px 18px 15px 36px;color:var(--dim);font-size:14.5px}
+.spec li{margin-bottom:7px}
+.spec li:last-child{margin-bottom:0}
+.spec li b{color:var(--ink);font-weight:550}
+
+/* ---------- pager and page footer ---------- */
+.pager{display:flex;gap:12px;margin-top:64px}
+.pager a{flex:1;border:1px solid var(--line);border-radius:11px;padding:15px 18px;
+         text-decoration:none;background:var(--panel);transition:background .12s}
+.pager a:hover{background:var(--panel2)}
+.pager span{flex:1}
+.pager .dir{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.pager .nm{font-size:15.5px;font-weight:550;color:var(--ink)}
+.pager a.next{text-align:right}
+.pagefoot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+          font-size:12.5px;color:var(--faint);display:flex;flex-wrap:wrap;gap:6px 24px}
+.pagefoot a{color:var(--dim)}
+
+/* ---------- title page: document standard ---------- */
+.standard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+          border:1px solid var(--line);border-radius:10px;margin:36px 0;overflow:hidden}
+.standard > div{padding:13px 16px;border-right:1px solid var(--line);background:var(--panel)}
+.standard > div:last-child{border-right:none}
+.standard .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.standard .v{font-size:14px;color:var(--ink);font-weight:500}
+.standard .v small{display:block;font-weight:400;font-size:12px;color:var(--faint)}
+@media(max-width:640px){.standard{grid-template-columns:1fr 1fr}.standard > div{border-bottom:1px solid var(--line)}}
+
+/* ---------- title page: collection map ---------- */
+.map{display:flex;flex-direction:column;gap:18px;margin:44px 0}
+.maplbl{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.15em;color:var(--faint);display:block;margin-bottom:8px}
+.mapboxes{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.map .box{border:1px solid var(--line2);border-radius:8px;padding:7px 13px;font-size:13px;font-weight:500;
+          color:var(--ink);background:var(--panel);text-decoration:none;display:inline-block;
+          transition:border-color .12s ease,color .12s ease,background .12s ease}
+a.box:hover,a.box:focus-visible{border-color:var(--accent);color:var(--accent);background:var(--panel2)}
+a.box:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.map .box{transition:none}}
+.map .box.dim{color:var(--faint);border-style:dashed;font-weight:400}
+.map .arr{color:var(--faint);font-size:12px}
+
+/* ---------- title page: parts ---------- */
+.part{margin:44px 0 0}
+.part-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.part-head .rn{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:var(--accent)}
+.part-head h2{font-size:22px;letter-spacing:-.02em;font-weight:600;margin:0;padding:0;border:0}
+.part > p{font-size:14.5px;margin:0 0 14px}
+.toc{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.toc .row{display:flex;align-items:baseline;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line);
+          background:var(--panel);color:var(--ink);text-decoration:none;transition:background .12s}
+.toc .row:last-child{border-bottom:none}
+.toc a.row:hover{background:var(--panel2)}
+.toc .row.planned .t{color:var(--faint)}
+.toc .n{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--faint);width:20px;flex:none}
+.toc .t{font-weight:550;font-size:15.5px;letter-spacing:-.01em}
+.toc .d{font-size:13.5px;color:var(--dim);margin-left:auto;text-align:right}
+@media(max-width:640px){.toc .d{display:none}}
+</style>
+<div class="shell">
+<nav>
+  <div class="brand"><a class="home" href="index.html"><span class="mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><radialGradient id="orrerySun" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#c7a6ff"/><stop offset=".5" stop-color="#7c86ea"/><stop offset="1" stop-color="#3fb7c9"/></radialGradient></defs><g fill="currentColor"><path d="M27.499 11.428 A12.375 12.375 0 1 1 20.572 4.501 A4.900 4.900 0 0 0 19.600 6.004 A10.625 10.625 0 1 0 25.996 12.400 A4.900 4.900 0 0 0 27.499 11.428 Z"/><circle cx="24.132" cy="7.868" r="2.5"/></g><g fill="url(#orrerySun)"><circle cx="16" cy="16" r="3.1"/></g></svg></span><b>Orrery Method</b></a><span class="slogan">Directed AI development</span><span class="sp"></span><label class="langsel iconbtn" title="English"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6.4"/><ellipse cx="8" cy="8" rx="2.9" ry="6.4"/><path d="M1.8 8h12.4M2.6 4.8h10.8M2.6 11.2h10.8"/></svg><span class="lc">EN</span><select id="lang" aria-label="Language"><option value="en" selected>English</option><option value="ru">Русский</option></select></label><button class="iconbtn" id="theme" title="Toggle theme" aria-label="Toggle theme"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button><a class="iconbtn" href="https://github.com/nyxene/orrery-method" title="Source repository" aria-label="Source repository"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .2a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.23.48-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.67.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.66 7.66 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.24.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8 8 0 0 0 8 .2Z"/></svg></a><span class="ver">0.0.3</span></div>
+  <div class="g">I · Method</div>
+  <a href="overview.html"><span class="n">01</span>Overview</a>
+  <a href="roles.html"><span class="n">02</span>Roles</a>
+  <a href="artifacts.html"><span class="n">03</span>Artifacts</a>
+  <a href="cycle.html"><span class="n">04</span>The cycle</a>
+  <a href="invariants.html"><span class="n">05</span>Invariants</a>
+  <div class="g">II · Reference</div>
+  <a href="terms.html"><span class="n">06</span>Terms</a>
+  <a href="classification.html"><span class="n">07</span>Classification</a>
+  <a href="measurement.html"><span class="n">08</span>Measurement</a>
+  <a href="automation.html"><span class="n">09</span>Automation</a>
+  <a href="mapping.html" class="on"><span class="n">10</span>Mapping</a>
+  <div class="secs"><a href="#what-a-binding-supplies">What a binding supplies</a>
+<a href="#two-bindings-in-full">Two bindings in full</a>
+<a href="#github">GitHub</a>
+<a href="#jira">Jira</a>
+<a href="#gitlab">GitLab</a>
+<a href="#azure-devops-cmmi">Azure DevOps CMMI</a>
+<a href="#linear">Linear</a>
+<a href="#youtrack">YouTrack</a>
+<a href="#what-is-behind-each-of-these">What is behind each of these</a></div>
+  <div class="g">III · Practice</div>
+  <a href="playbooks.html"><span class="n">11</span>Playbooks</a>
+  <a href="agents.html"><span class="n">12</span>Agents</a>
+  <div class="g">IV · Appendix</div>
+  <a href="application.html"><span class="n">13</span>Application</a>
+</nav>
+
+<main>
+  <div class="crumb"><a href="index.html">Orrery Method</a><span>›</span><span>Part II · Reference</span><span>›</span><span>Mapping</span></div>
+  <div class="meta">
+    <span><b>DOC</b> 10 / 13</span>
+    <span><b>VERSION</b> 0.0.3</span>
+    <span><b>REVISED</b> 2026-08-28</span>
+    
+  </div>
+
+  <div class="num">10 · REFERENCE</div>
+  <h1>Mapping</h1>
+  <p class="lead">The method's objects are not platform features, so they survive a change of tracker. A binding says which native primitive carries each one — and what it deliberately leaves unused.</p>
+<h2 id="what-a-binding-supplies">What a binding supplies <span class="tier rule">Rule</span></h2>
+<p>A tracker may bind the method only if it supplies all of these; anything it lacks, the binding states as lacking rather than approximates.</p>
+<div class="spec"><div class="hd">A binding supplies</div>
+<ol>
+<li><b>Containment</b> — a feature owning its tasks, with a rollup derived from it.</li>
+<li><b>A release container</b> — a named set an item belongs to, closable, and needing no dates.</li>
+<li><b>Closure by merge</b> — the pull request closing its task with no second act.</li>
+<li><b>Dependency links</b> — native, queryable, removed by the blocker closing.</li>
+<li><b>The mirrored link</b> — a reference in one item's body appears on its target, so provenance reads in both directions.</li>
+<li><b>The axes</b> — a home for type, area, priority and flags that an agent can read and write.</li>
+<li><b>A home for the review mark</b> — the one fact the method cannot derive needs somewhere append-only to live, and it is a file in the repository rather than a tracker object.</li>
+<li><b>A record that survives the work</b> — the evidence package and its verdict stay readable on a closed item, because that is where independence is shown after the fact.</li>
+</ol></div>
+<p>A primitive the method does not use is left untouched, never repurposed. An unused field costs nothing; a repurposed one carries someone else's semantics into every query that reads it.</p>
+<h2 id="two-bindings-in-full">Two bindings in full <span class="tier rule">Rule</span></h2>
+<p>These two are written out object by object because everything after them is stated as a difference from one of the two. Each row fixes one object to one native primitive, and a project on either tracker uses the column as written.</p>
+<div class="wrap"><table>
+<thead>
+<tr>
+<th>Object</th>
+<th>GitHub</th>
+<th>Jira</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feature</td>
+<td>Issue, <code>type/feature</code>, sub-issues</td>
+<td>Epic</td>
+</tr>
+<tr>
+<td>Task</td>
+<td>Sub-issue, one pull request, <code>Closes #N</code></td>
+<td>Story, one pull request, a transition on merge</td>
+</tr>
+<tr>
+<td>Flat item</td>
+<td>Issue with no parent and no milestone</td>
+<td>Story, Bug or Task with no Epic and no fixVersion</td>
+</tr>
+<tr>
+<td>Release</td>
+<td>Milestone</td>
+<td>Version — released as an act, dates left empty</td>
+</tr>
+<tr>
+<td>Evidence package</td>
+<td>A comment on the issue</td>
+<td>A comment on the issue</td>
+</tr>
+<tr>
+<td>Ledger</td>
+<td>A file in the repository — no tracker object</td>
+<td>A file in the repository — no tracker object</td>
+</tr>
+<tr>
+<td>Dependency</td>
+<td><code>blocked-by</code> link</td>
+<td>The <code>blocks</code> issue link</td>
+</tr>
+<tr>
+<td>Type axis</td>
+<td><code>type/</code> labels</td>
+<td>Issue type</td>
+</tr>
+<tr>
+<td>Area axis</td>
+<td><code>area/</code> labels</td>
+<td>Component</td>
+</tr>
+<tr>
+<td>Priority axis</td>
+<td><code>priority/</code> labels</td>
+<td>The Priority field</td>
+</tr>
+<tr>
+<td>Flags</td>
+<td><code>flag/</code> labels</td>
+<td>Labels</td>
+</tr>
+<tr>
+<td>Feature progress</td>
+<td>Sub-issue rollup</td>
+<td>Epic progress</td>
+</tr>
+<tr>
+<td>The review mark</td>
+<td>A repository file, appended once per reading pass</td>
+<td>A repository file, appended once per reading pass</td>
+</tr>
+</tbody>
+</table></div>
+<p>These two are written out because they are the two most projects are already on: one is where the code lives, the other is where the work lives. Between them they cover both shapes a tracker takes — every axis in labels, or every axis in a field of its own — so a third column would repeat <em>a file in the repository</em> four more times and bury the handful of cells that actually differ.</p>
+<p>Everything after them is stated as a difference, and each opens by naming which column to read.</p>
+<div class="wrap"><table>
+<thead>
+<tr>
+<th>Binding</th>
+<th>Read</th>
+<th>And expect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub</td>
+<td>—</td>
+<td>The most common; derived like the rest</td>
+</tr>
+<tr>
+<td>Jira</td>
+<td>—</td>
+<td>Closure needs a configured transition; a blocking link outlives its blocker</td>
+</tr>
+<tr>
+<td>GitLab</td>
+<td>GitHub</td>
+<td>Containment and dependencies are paid features; below that tier it does not bind</td>
+</tr>
+<tr>
+<td>Azure DevOps CMMI</td>
+<td>Jira</td>
+<td>Most of the platform left deliberately unused</td>
+</tr>
+<tr>
+<td>Linear</td>
+<td>GitHub for closure, Jira for the axes</td>
+<td>Cycles are a time box and stay unused</td>
+</tr>
+<tr>
+<td>YouTrack</td>
+<td>Jira</td>
+<td>It will model anything, including the method wrongly</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="github">GitHub <span class="tier rule">Rule</span></h2>
+<p>On GitHub every axis is carried by labels. That is forced rather than chosen, because the platform's structured type primitive exists only for organisations. On a personal account there is no alternative an automation token can read, which is why label discipline is structure rather than hygiene; if the repository ever moves to an organisation, the migration is mechanical — read each issue's single <code>type/</code> label, set the type, delete the label.</p>
+<p>The binding supplies the naming the axes themselves do not prescribe: <code>axis/value</code>, lowercase, hyphens between words, singular nouns. The prefix makes the axes visible to an agent reading a flat label list and checkable by string matching, and every label in an axis wears one colour — two chips of one colour on one issue is exclusivity broken, readable at a glance on every axis but the flags, whose members legitimately share theirs. The platform's default labels are deleted before the first issue is filed, because each is a bare-word second home for a value the axes already carry.</p>
+<p>Everything else is native. Sub-issues carry containment and the rollup, <code>Closes #N</code> and the linked branch both close a task at merge, dependency links come off when the blocker closes, and the ready queue is the open-and-unblocked search.</p>
+<p>A release's bytes are whatever <code>main</code> holds at its tag — membership in the milestone records the commitment, and the changelog derives from the merges between two tags. A bug's <code>Origin: #N</code> line needs no machinery at all: the platform mirrors every body link onto the target's timeline, so the feature's page carries its own after-history unasked.</p>
+<h2 id="jira">Jira <span class="tier rule">Rule</span></h2>
+<p>Where GitHub puts every axis in a label, Jira gives each one a field of its own: issue type carries type, Component carries area, Priority is its own field, and labels are left to the flags alone. There is no naming convention to keep and no colour to read, because the platform enforces one value per field without being asked.</p>
+<p>One primitive here is better than anything else in this document. <strong>A Version is a release exactly as the method defines one</strong> — a named set an item belongs to, released as an act, and carrying no dates unless someone adds them. Every other binding needs a caveat about time at this row; this one needs none.</p>
+<p>Containment offers three levels where the method uses two. Epic owns Story, Story owns Sub-task, and the method stops at the first pair: a feature is an Epic, its tasks are Stories, and Sub-task stays unused like every other primitive the method does not need.</p>
+<p>Two things this binding states as lacking rather than approximates.</p>
+<p><strong>Closure is not one act.</strong> The platform does not close an issue when a pull request merges; a transition has to be configured to do it. Until that automation exists, the merge and the close are two acts, and the second one is somebody remembering — which is the failure the method names everywhere else. The binding is incomplete until the transition is wired, and a project that has not wired it does not have this binding.</p>
+<p><strong>A blocking link outlives its blocker.</strong> The link stays after the blocker closes, so the ready queue cannot be &quot;open and unblocked&quot; as a plain link query; it is open, minus those whose blockers are still open. The fact is recoverable and the query is one clause longer — but it is a query the other bindings do not need, and it is stated here rather than discovered later.</p>
+<h2 id="gitlab">GitLab <span class="tier rule">Rule</span></h2>
+<p>Read the GitHub column and change almost nothing. <code>Closes #N</code> in a merge request closes its issue at merge, a milestone carries the release, labels carry the axes with the same <code>axis/value</code> naming, and mentions mirror onto their target.</p>
+<p>What differs is not shape but tier. <strong>Epics, blocking dependencies and scoped labels are paid features.</strong> That matters unevenly:</p>
+<ul>
+<li>Without epics there is no containment above an issue, and the method's two live levels have nowhere to sit. A checklist inside an issue is not containment: it produces no child item, no rollup and nothing a query can find.</li>
+<li>Without blocking links, dependency is prose again — the thing the method replaced with a link precisely because prose is not queryable.</li>
+<li>Scoped labels are what the platform can enforce; without them exclusivity on an axis is discipline, exactly as it is on GitHub.</li>
+</ul>
+<p>So on a free tier this binding states two of the eight as lacking, and two lacking is not a binding. On a tier that carries them, GitLab binds the method as completely as GitHub does, and the scoped labels make it stricter — the platform refuses a second value on one axis instead of leaving it to a colour convention.</p>
+<h2 id="azure-devops-cmmi">Azure DevOps CMMI <span class="tier rule">Rule</span></h2>
+<p>Read the Jira column: the axes have native homes here too. Area dissolves into Area Path, priority into the Priority field, and only type and the flags need tags — so the label discipline shrinks the same way, and for the same reason.</p>
+<p>Two rows differ. A task is a Requirement, closed by the pull request's <code>AB#</code> completion — which is closure in one act, as GitHub has it and Jira does not.</p>
+<p>An Iteration Path serves as the release with its dates left empty: the platform reads an iteration as a time box, and the method forecasts in tokens, so a date would assert something nobody measured. Jira's Version needs no such instruction.</p>
+<p>CMMI arrives with more machinery than the method consumes — Change Request, Risk, Review, the estimate fields, a state machine with a Resolved stage. All of it stays unused, and that is the binding's defining feature rather than a footnote: state is derived here as everywhere, the rollup answers progress, and no hand moves a work item across a board.</p>
+<h2 id="linear">Linear <span class="tier rule">Rule</span></h2>
+<p>Read GitHub for closure and Jira for the axes. A merged pull request closes its issue through the native integration, and priority is a field rather than a label, as it is in Jira.</p>
+<p>The one thing to get right is the release. <strong>A Cycle is a time box, and the method does not forecast in time</strong> — so Cycles stay unused and a Project carries the release. Leaving that unstated is how a project ends up planning in fortnights inside a method that measures in tokens, having never decided to.</p>
+<p>Everything else lands cleanly: sub-issues carry containment and its rollup, blocking relations are native and queryable, comments outlive the work, and the API is a write path an agent can hold. Of the four bindings stated here it is the one that asks for the fewest caveats.</p>
+<h2 id="youtrack">YouTrack <span class="tier rule">Rule</span></h2>
+<p>Read Jira, and expect the same shape with more of it configurable: the axes are custom fields, so type, area, priority and the flags each get a field rather than sharing a label namespace, and a Version-like field carries the release.</p>
+<p>That configurability is the caution. <strong>A tracker that will model anything will let a project model the method wrongly</strong> — a fifth axis, a status field, an estimate in hours — and none of it will be refused. The value set and the eight invariants are the whole of the guard here; the platform supplies none of it.</p>
+<p>Closure rides commit commands and the VCS integration, which puts it in the same position as Jira: it works, and it is configuration rather than a property of the platform. The binding is incomplete until that configuration exists.</p>
+<h2 id="what-is-behind-each-of-these">What is behind each of these <span class="tier guide">Guide</span></h2>
+<p>Six bindings laid out in a table read as six tested arrangements. They are not, and saying so where a reader meets them costs one paragraph.</p>
+<p><strong>No binding has been run, because no project has yet worked to this method.</strong> All six are derived the same way: from what each platform documents about its own primitives, checked against the eight requirements and nothing else.</p>
+<p><strong>Order on this page is popularity, and nothing else.</strong> GitHub leads because a reader is most likely to already be there; Jira sits beside it in the full table because that is where most projects already keep their work. Neither position claims a binding is better known — the two are equally unproven, along with the four after them.</p>
+<p>Their standing is <code>Pending</code>, like the corpus carrying them. The first project to run one will find things this page does not say, and when it does, the finding belongs here, on the binding, filed like any other defect.</p>
+
+  <div class="pager"><a href="automation.html"><div class="dir">← Previous</div><div class="nm">09 · Automation</div></a><a class="next" href="playbooks.html"><div class="dir">Next →</div><div class="nm">11 · Playbooks</div></a></div>
+  <div class="pagefoot"><span>Orrery Method — Directed AI development · 0.0.3</span><span>© 2026 Evgeniy Kovrov · MIT</span><span>Found an error? <a href="https://github.com/nyxene/orrery-method/issues/new?template=errata.yml">Report it.</a></span></div>
+</main>
+</div>
+<script>
+(()=>{
+  const links=[...document.querySelectorAll('nav .secs a')];
+  if(!links.length) return;
+  const byId=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const heads=[...byId.keys()].map(id=>document.getElementById(id)).filter(Boolean);
+  const last=links[links.length-1];
+  const mark=a=>{ if(!a) return; links.forEach(x=>x.classList.toggle('on',x===a)); };
+
+  // The final section can never satisfy the observer: a heading is highlighted
+  // while it sits in the top slice of the window, and once the page bottom is
+  // reached that heading has come to rest well below it. Scrolled to the end,
+  // the reader is looking at the last section whatever the observer believes.
+  const atEnd=()=>window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4;
+
+  const io=new IntersectionObserver(es=>{
+    if(atEnd()){ mark(last); return; }
+    for(const e of es) if(e.isIntersecting) mark(byId.get(e.target.id));
+  },{rootMargin:'-10% 0px -75% 0px'});
+  heads.forEach(h=>io.observe(h));
+
+  addEventListener('scroll',()=>{ if(atEnd()) mark(last); },{passive:true});
+  // Opened at the top, or too short to scroll at all, a page starts on section one.
+  if(!links.some(a=>a.classList.contains('on'))) mark(atEnd()?last:links[0]);
+})();
+</script>
+<script>
+document.getElementById('lang').addEventListener('change',e=>{
+  location.href='../'+e.target.value+'/'+(location.pathname.split('/').pop()||'index.html');
+});
+</script>
+<script>
+(()=>{
+  const root=document.documentElement, btn=document.getElementById('theme');
+  const saved=localStorage.getItem('method-theme');
+  if(saved) root.dataset.theme=saved;
+  btn.addEventListener('click',()=>{
+    const dark=root.dataset.theme ? root.dataset.theme==='dark'
+              : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme=dark?'light':'dark';
+    localStorage.setItem('method-theme',root.dataset.theme);
+  });
+})();
+</script>

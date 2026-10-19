@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The cycle — Orrery Method</title>
+<meta name="description" content="Work passes six stages. Each hands a named artifact to the next, the Owner gates the passage into a release and nothing after it, and their reading comes last of all.">
+<meta property="og:title" content="The cycle — Orrery Method">
+<meta property="og:description" content="Work passes six stages. Each hands a named artifact to the next, the Owner gates the passage into a release and nothing after it, and their reading comes last of all.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Orrery Method">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+/* Orrery Method — design tokens and components.
+   Any visual change starts here, never in the generated pages: the site is a
+   rendering, and editing a rendering is the two-sources failure this corpus
+   exists to prevent. */
+
+:root{
+  --bg:#08090A; --panel:#0E0F11; --panel2:#141517; --line:#1F2023; --line2:#2A2C30;
+  --ink:#F7F8F8; --dim:#9CA1A8; --faint:#62666D;
+  --accent:#5E6AD2; --soft:#7B85DE; --good:#4CB782; --amber:#D4A72C; --teal:#4EA8C9; --rose:#E0698C;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#FCFCFD; --panel:#FFF; --panel2:#F4F5F8; --line:#E4E6EA; --line2:#D3D6DB;
+    --ink:#0D0E10; --dim:#5A5F68; --faint:#8A8F98;
+    --soft:#4954C4; --good:#2F8F63; --amber:#A67C11; --teal:#2E7E9B; --rose:#B94A6B;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#FCFCFD; --panel:#FFF; --panel2:#F4F5F8; --line:#E4E6EA; --line2:#D3D6DB;
+  --ink:#0D0E10; --dim:#5A5F68; --faint:#8A8F98;
+  --soft:#4954C4; --good:#2F8F63; --amber:#A67C11; --teal:#2E7E9B; --rose:#B94A6B;
+}
+:root[data-theme="dark"]{
+  --bg:#08090A; --panel:#0E0F11; --panel2:#141517; --line:#1F2023; --line2:#2A2C30;
+  --ink:#F7F8F8; --dim:#9CA1A8; --faint:#62666D;
+  --soft:#7B85DE; --good:#4CB782; --amber:#D4A72C; --teal:#4EA8C9; --rose:#E0698C;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important} }
+
+body{margin:0;background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.7;
+     font-family:"Inter var","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+     letter-spacing:-.008em;-webkit-font-smoothing:antialiased}
+
+/* ---------- frame ---------- */
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0}
+@media(max-width:900px){.shell{grid-template-columns:1fr}}
+main{max-width:960px;padding:40px 48px 96px}
+main.title{padding:64px 48px 120px;margin:0 auto}
+@media(max-width:700px){main,main.title{padding:32px 24px 80px}}
+
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:34px 20px 40px 28px;border-right:1px solid var(--line)}
+@media(max-width:900px){nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}}
+.brand{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.brand .sp{flex:1}
+.brand a.home{display:flex;align-items:center;gap:9px;color:var(--ink);text-decoration:none;padding:0;margin:0;background:none;box-shadow:none}
+.mark{width:22px;height:22px;flex:none;color:var(--accent);display:block}
+.mark svg{width:100%;height:100%;display:block}
+.brand b{font-size:14px;font-weight:600;letter-spacing:-.01em}
+/* The slogan rides beside the name on every page: a reader landing mid-corpus
+   still learns what this is. It yields first when the row runs out of width. */
+.brand .slogan{
+  font-size:11.5px;color:var(--faint);letter-spacing:.02em;
+  padding-left:9px;margin-left:2px;border-left:1px solid var(--line2);
+  white-space:nowrap;
+}
+@media (max-width:640px){.brand .slogan{display:none}}
+.slogan-lg{
+  font-size:15px;color:var(--accent);letter-spacing:.03em;
+  margin:-6px 0 22px;font-weight:500;
+}
+.iconbtn{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex:none;
+         padding:0;margin:0;border:none;border-radius:6px;background:none;color:var(--faint);cursor:pointer;box-shadow:none}
+.iconbtn:hover{color:var(--ink);background:var(--panel2)}
+.iconbtn svg{width:15px;height:15px;display:block;margin:auto}
+a.iconbtn svg{width:14px;height:14px}
+/* Sits at the far end of the control row. It used to be indented to line up
+   under the name, which stopped meaning anything once the controls wrapped onto
+   their own line — the indent then read as a stray element rather than an
+   alignment. */
+.ver{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);
+     letter-spacing:.04em;margin:0 0 0 auto;align-self:center}
+
+/* One of the icon buttons, not a form field. The globe is the whole control;
+   the native select lies transparent over it, so any number of locales still
+   opens as a real menu and keyboard access is the platform's. */
+.langsel{position:relative;cursor:pointer;width:auto;gap:5px;padding:0 7px}
+.langsel svg{width:14px;height:14px;display:block;flex:none}
+/* Which locale is showing, said rather than implied — a globe alone asks the
+   reader to guess, and on a translated page that guess is the whole question. */
+.langsel .lc{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;
+         letter-spacing:.06em;line-height:1;font-weight:500}
+.langsel select{position:absolute;inset:0;width:100%;height:100%;
+         opacity:0;cursor:pointer;border:none;appearance:none;-webkit-appearance:none}
+.langsel:hover{color:var(--ink);background:var(--panel2)}
+.langsel:focus-within{color:var(--ink);outline:2px solid var(--accent);outline-offset:2px}
+
+/* The sidebar is a narrow column: the same brand row that fits the title page
+   breaks the name onto two lines there and clips the slogan. In the sidebar the
+   name keeps the first line to itself and the controls wrap beneath it; the
+   slogan stays on the title page and in every page footer, where there is room. */
+nav .brand{flex-wrap:wrap}
+nav .brand .slogan{display:none}
+nav .brand b{white-space:nowrap}
+nav .brand .sp{flex:0 0 100%;height:0;margin:0}
+nav .brand .langsel,nav .brand .iconbtn,nav .brand .ver{margin-top:10px}
+nav .brand{margin-bottom:22px}
+
+nav .g{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em;
+       text-transform:uppercase;color:var(--faint);padding:18px 10px 6px}
+nav a{display:flex;align-items:baseline;gap:8px;padding:5px 10px;margin:1px 0;border-radius:6px;
+      color:var(--dim);text-decoration:none;font-size:13.5px;transition:color .12s,background .12s}
+nav a:hover{color:var(--ink);background:var(--panel2)}
+nav a.on{color:var(--ink);background:var(--panel2);box-shadow:inset 2px 0 0 var(--accent)}
+nav a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+nav a .n, nav span.planned .n{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);width:14px;flex:none}
+nav span.planned{display:flex;align-items:baseline;gap:8px;padding:5px 10px;margin:1px 0;font-size:13.5px;color:var(--line2)}
+nav .secs{margin:2px 0 4px 17px;border-left:1px solid var(--line);padding-left:2px}
+nav .secs a{font-size:12.5px;padding:3px 10px;color:var(--faint)}
+nav .secs a:hover{color:var(--ink)}
+nav .secs a.on{box-shadow:none;background:none;color:var(--ink)}
+
+/* ---------- document header ---------- */
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:var(--faint);margin-bottom:8px}
+.crumb a{color:var(--dim);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:ui-monospace,Menlo,monospace;
+      font-size:11px;letter-spacing:.06em;color:var(--faint);
+      padding-bottom:26px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.meta b{color:var(--dim);font-weight:400}
+/* A lagging translation says so on its own face; silence would assert currency. */
+.meta .behind{color:var(--amber)}
+.meta .behind b{color:var(--amber);font-weight:500}
+.num{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:var(--accent);margin-bottom:12px}
+
+/* ---------- type ---------- */
+h1{font-size:42px;line-height:1.08;letter-spacing:-.032em;font-weight:600;margin:0 0 18px;text-wrap:balance}
+main.title h1{font-size:52px;line-height:1.05;letter-spacing:-.035em;margin-top:40px}
+h2{font-size:25px;line-height:1.25;letter-spacing:-.022em;font-weight:600;margin:0 0 14px;text-wrap:balance;
+   padding-top:44px;margin-top:36px;border-top:1px solid var(--line)}
+h3{font-size:16px;letter-spacing:-.012em;font-weight:600;margin:0 0 6px}
+p{margin:0 0 17px;color:var(--dim)}
+.lead{font-size:19px;line-height:1.6;color:var(--ink);letter-spacing:-.014em;margin:0 0 16px}
+main.title .lead{font-size:20px;letter-spacing:-.015em;margin-bottom:18px}
+strong{color:var(--ink);font-weight:550}
+hr{border:0;border-top:1px solid var(--line);margin:48px 0}
+ul,ol{margin:0 0 17px;padding-left:20px;color:var(--dim)}
+li{margin-bottom:5px}
+a{color:var(--soft)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.87em;background:var(--panel2);padding:.12em .4em;border-radius:4px;color:var(--ink)}
+
+/* ---------- normativity tier badge ---------- */
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;
+      letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid var(--line2);
+      color:var(--dim);vertical-align:4px;margin-left:10px}
+.tier.rule{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.tier.principle{color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+/* Standing rides beside force and never replaces it: Pending is the absence of
+   this badge, so the corpus's default state costs no ink and cannot go stale. */
+.standing{display:inline-block;vertical-align:middle;margin-left:6px;
+          font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.1em;
+          text-transform:uppercase;padding:2px 7px;border-radius:4px;
+          color:var(--good);border:1px solid color-mix(in srgb,var(--good) 45%,transparent)}
+.tier.guide{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 40%,transparent)}
+
+/* ---------- cards ---------- */
+.band{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--faint);margin:26px 0 10px}
+.cards{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:26px 0}
+.c{border:1px solid var(--line);border-radius:11px;padding:18px 19px;background:var(--panel);display:flex;flex-direction:column;gap:9px}
+.c .tag{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.c p{font-size:14.5px;margin:0;line-height:1.6}
+.c .foot{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+
+/* ---------- skeleton chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0}
+.chip{display:flex;align-items:baseline;gap:8px;padding:10px 16px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}
+.chip b{font-size:19px;font-weight:600;letter-spacing:-.02em}
+.chip span{font-size:13.5px;color:var(--dim)}
+
+/* ---------- tables ---------- */
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:22px 0;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--dim)}
+th{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:400}
+td:first-child{color:var(--ink);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+.wrap{overflow-x:auto}
+.wrap table{min-width:520px}
+
+/* ---------- figures ---------- */
+figure{margin:28px 0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{color:var(--faint);font-size:13.5px;margin-top:12px}
+
+/* ---------- rationale and exception ---------- */
+.why{border-left:2px solid var(--accent);padding:2px 0 2px 18px;margin:24px 0}
+.why .lbl{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.why p{margin:0;color:var(--ink);font-size:15px;line-height:1.65}
+.why p+p{margin-top:10px}
+.exc{border-left:2px solid var(--amber);padding:2px 0 2px 18px;margin:24px 0}
+.exc .lbl{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.exc p{margin:0;color:var(--ink);font-size:15px;line-height:1.65}
+
+/* ---------- numbered specification card ---------- */
+.spec{border:1px solid var(--line);border-radius:11px;background:var(--panel);overflow:hidden;margin:24px 0}
+.spec .hd{padding:11px 18px;border-bottom:1px solid var(--line);background:var(--panel2);
+          font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.spec ol{margin:0;padding:14px 18px 15px 36px;color:var(--dim);font-size:14.5px}
+.spec li{margin-bottom:7px}
+.spec li:last-child{margin-bottom:0}
+.spec li b{color:var(--ink);font-weight:550}
+
+/* ---------- pager and page footer ---------- */
+.pager{display:flex;gap:12px;margin-top:64px}
+.pager a{flex:1;border:1px solid var(--line);border-radius:11px;padding:15px 18px;
+         text-decoration:none;background:var(--panel);transition:background .12s}
+.pager a:hover{background:var(--panel2)}
+.pager span{flex:1}
+.pager .dir{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.pager .nm{font-size:15.5px;font-weight:550;color:var(--ink)}
+.pager a.next{text-align:right}
+.pagefoot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+          font-size:12.5px;color:var(--faint);display:flex;flex-wrap:wrap;gap:6px 24px}
+.pagefoot a{color:var(--dim)}
+
+/* ---------- title page: document standard ---------- */
+.standard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+          border:1px solid var(--line);border-radius:10px;margin:36px 0;overflow:hidden}
+.standard > div{padding:13px 16px;border-right:1px solid var(--line);background:var(--panel)}
+.standard > div:last-child{border-right:none}
+.standard .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.standard .v{font-size:14px;color:var(--ink);font-weight:500}
+.standard .v small{display:block;font-weight:400;font-size:12px;color:var(--faint)}
+@media(max-width:640px){.standard{grid-template-columns:1fr 1fr}.standard > div{border-bottom:1px solid var(--line)}}
+
+/* ---------- title page: collection map ---------- */
+.map{display:flex;flex-direction:column;gap:18px;margin:44px 0}
+.maplbl{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.15em;color:var(--faint);display:block;margin-bottom:8px}
+.mapboxes{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.map .box{border:1px solid var(--line2);border-radius:8px;padding:7px 13px;font-size:13px;font-weight:500;
+          color:var(--ink);background:var(--panel);text-decoration:none;display:inline-block;
+          transition:border-color .12s ease,color .12s ease,background .12s ease}
+a.box:hover,a.box:focus-visible{border-color:var(--accent);color:var(--accent);background:var(--panel2)}
+a.box:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.map .box{transition:none}}
+.map .box.dim{color:var(--faint);border-style:dashed;font-weight:400}
+.map .arr{color:var(--faint);font-size:12px}
+
+/* ---------- title page: parts ---------- */
+.part{margin:44px 0 0}
+.part-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.part-head .rn{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:var(--accent)}
+.part-head h2{font-size:22px;letter-spacing:-.02em;font-weight:600;margin:0;padding:0;border:0}
+.part > p{font-size:14.5px;margin:0 0 14px}
+.toc{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.toc .row{display:flex;align-items:baseline;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line);
+          background:var(--panel);color:var(--ink);text-decoration:none;transition:background .12s}
+.toc .row:last-child{border-bottom:none}
+.toc a.row:hover{background:var(--panel2)}
+.toc .row.planned .t{color:var(--faint)}
+.toc .n{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--faint);width:20px;flex:none}
+.toc .t{font-weight:550;font-size:15.5px;letter-spacing:-.01em}
+.toc .d{font-size:13.5px;color:var(--dim);margin-left:auto;text-align:right}
+@media(max-width:640px){.toc .d{display:none}}
+</style>
+<div class="shell">
+<nav>
+  <div class="brand"><a class="home" href="index.html"><span class="mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><radialGradient id="orrerySun" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#c7a6ff"/><stop offset=".5" stop-color="#7c86ea"/><stop offset="1" stop-color="#3fb7c9"/></radialGradient></defs><g fill="currentColor"><path d="M27.499 11.428 A12.375 12.375 0 1 1 20.572 4.501 A4.900 4.900 0 0 0 19.600 6.004 A10.625 10.625 0 1 0 25.996 12.400 A4.900 4.900 0 0 0 27.499 11.428 Z"/><circle cx="24.132" cy="7.868" r="2.5"/></g><g fill="url(#orrerySun)"><circle cx="16" cy="16" r="3.1"/></g></svg></span><b>Orrery Method</b></a><span class="slogan">Directed AI development</span><span class="sp"></span><label class="langsel iconbtn" title="English"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6.4"/><ellipse cx="8" cy="8" rx="2.9" ry="6.4"/><path d="M1.8 8h12.4M2.6 4.8h10.8M2.6 11.2h10.8"/></svg><span class="lc">EN</span><select id="lang" aria-label="Language"><option value="en" selected>English</option><option value="ru">Русский</option></select></label><button class="iconbtn" id="theme" title="Toggle theme" aria-label="Toggle theme"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button><a class="iconbtn" href="https://github.com/nyxene/orrery-method" title="Source repository" aria-label="Source repository"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .2a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.23.48-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.67.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.66 7.66 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.24.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8 8 0 0 0 8 .2Z"/></svg></a><span class="ver">0.0.3</span></div>
+  <div class="g">I · Method</div>
+  <a href="overview.html"><span class="n">01</span>Overview</a>
+  <a href="roles.html"><span class="n">02</span>Roles</a>
+  <a href="artifacts.html"><span class="n">03</span>Artifacts</a>
+  <a href="cycle.html" class="on"><span class="n">04</span>The cycle</a>
+  <div class="secs"><a href="#a-stage-is-a-passage-not-a-status">A stage is a passage, not a status</a>
+<a href="#every-kind-runs-this-cycle-and-they-differ-at-two-points-only">Every kind runs this cycle, and they differ at two points only</a>
+<a href="#framing-ends-with-one-sentence">Framing ends with one sentence</a>
+<a href="#planning-resolves-uncertainty-first">Planning resolves uncertainty first</a>
+<a href="#execution-is-one-session-against-one-item">Execution is one session against one item</a>
+<a href="#a-discovery-is-filed-now-and-done-next">A discovery is filed now and done next</a>
+<a href="#a-task-that-outgrows-one-pull-request-splits">A task that outgrows one pull request splits</a>
+<a href="#verification-runs-cheapest-first">Verification runs cheapest first</a>
+<a href="#the-verification-can-refuse">The verification can refuse</a>
+<a href="#the-merge-closes-and-nobody-waits">The merge closes, and nobody waits</a>
+<a href="#acceptance-is-retrospective">Acceptance is retrospective</a>
+<a href="#starting-is-governed-by-the-unread-queue">Starting is governed by the unread queue</a>
+<a href="#an-incident-displaces-and-leaves-a-handoff">An incident displaces, and leaves a handoff</a></div>
+  <a href="invariants.html"><span class="n">05</span>Invariants</a>
+  <div class="g">II · Reference</div>
+  <a href="terms.html"><span class="n">06</span>Terms</a>
+  <a href="classification.html"><span class="n">07</span>Classification</a>
+  <a href="measurement.html"><span class="n">08</span>Measurement</a>
+  <a href="automation.html"><span class="n">09</span>Automation</a>
+  <a href="mapping.html"><span class="n">10</span>Mapping</a>
+  <div class="g">III · Practice</div>
+  <a href="playbooks.html"><span class="n">11</span>Playbooks</a>
+  <a href="agents.html"><span class="n">12</span>Agents</a>
+  <div class="g">IV · Appendix</div>
+  <a href="application.html"><span class="n">13</span>Application</a>
+</nav>
+
+<main>
+  <div class="crumb"><a href="index.html">Orrery Method</a><span>›</span><span>Part I · Method</span><span>›</span><span>The cycle</span></div>
+  <div class="meta">
+    <span><b>DOC</b> 4 / 13</span>
+    <span><b>VERSION</b> 0.0.3</span>
+    <span><b>REVISED</b> 2026-10-19</span>
+    
+  </div>
+
+  <div class="num">04 · METHOD</div>
+  <h1>The cycle</h1>
+  <p class="lead">Work passes six stages. Each hands a named artifact to the next, the Owner gates the passage into a release and nothing after it, and their reading comes last of all.</p>
+<div class="wrap"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Enters as</th>
+<th>Leaves as</th>
+<th>Passes when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Framing</td>
+<td>A wish</td>
+<td>A goal in one sentence, with an observable end state</td>
+<td>Its two plausible readings agree on the acceptance criteria</td>
+</tr>
+<tr>
+<td>Planning</td>
+<td>A goal</td>
+<td>A feature with its tasks</td>
+<td>The plan ruling — and every task passes the cold-start test</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>One unit of work</td>
+<td>A change and its evidence package</td>
+<td>The change is inside the item's stated boundary</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>A change and its evidence</td>
+<td>A verdict appended to the evidence</td>
+<td>Gates green; every finding fixed, filed, or refused</td>
+</tr>
+<tr>
+<td>Closing</td>
+<td>A verified change</td>
+<td>A closed item</td>
+<td>Its closing act — <a href="artifacts.html">Artifacts</a> names the five. Nothing else forces it, nothing delays it</td>
+</tr>
+<tr>
+<td>Acceptance</td>
+<td>A closed task and its evidence package</td>
+<td>The Owner's judgement</td>
+<td>Nothing. Acceptance gates nothing</td>
+</tr>
+</tbody>
+</table></div>
+<figure>
+<svg role="img" aria-label="Four stages in a band, fanning at verification into five closing acts, with acceptance sitting after and gating nothing." viewBox="0 0 700 300">
+  <defs>
+    <marker id="lc-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 8 4 0 8z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <!-- the six stages, as a band -->
+  <g fill="none" stroke-width="1.4">
+    <rect x="4"   y="40" width="104" height="38" rx="8" stroke="var(--soft)"/>
+    <rect x="124" y="40" width="104" height="38" rx="8" stroke="var(--soft)"/>
+    <rect x="244" y="40" width="104" height="38" rx="8" stroke="var(--teal)"/>
+    <rect x="364" y="40" width="104" height="38" rx="8" stroke="var(--amber)"/>
+  </g>
+  <g font-size="12" font-weight="550" fill="var(--ink)" text-anchor="middle">
+    <text x="56" y="64">Framing</text>
+    <text x="176" y="64">Planning</text>
+    <text x="296" y="64">Execution</text>
+    <text x="416" y="64">Verification</text>
+  </g>
+  <!-- what each stage reads off -->
+  <g font-size="9.5" fill="var(--faint)" text-anchor="middle">
+    <text x="56" y="94">no Goal yet</text>
+    <text x="176" y="94">Goal, no children</text>
+    <text x="296" y="94">open branch</text>
+    <text x="416" y="94">evidence posted</text>
+  </g>
+  <g stroke="var(--line2)" stroke-width="1.3" fill="none" color="var(--line2)" marker-end="url(#lc-arrow)">
+    <line x1="108" y1="59" x2="120" y2="59"/>
+    <line x1="228" y1="59" x2="240" y2="59"/>
+    <line x1="348" y1="59" x2="360" y2="59"/>
+    <line x1="468" y1="59" x2="486" y2="59"/>
+  </g>
+  <!-- the fan of closing acts -->
+  <text x="492" y="30" font-size="10.5" fill="var(--faint)" letter-spacing="1.4">CLOSING ACT</text>
+  <g fill="none" stroke-width="1.4">
+    <rect x="492" y="47" width="204" height="24" rx="8" stroke="var(--good)"/>
+    <rect x="492" y="77" width="204" height="24" rx="8" stroke="var(--rose)"/>
+    <rect x="492" y="107" width="204" height="24" rx="8" stroke="var(--teal)"/>
+    <rect x="492" y="137" width="204" height="24" rx="8" stroke="var(--accent)"/>
+    <rect x="492" y="167" width="204" height="24" rx="8" stroke="var(--amber)"/>
+  </g>
+  <g font-size="11.5" fill="var(--ink)">
+    <text x="506" y="63">A merge</text>
+    <text x="506" y="93">A refusal</text>
+    <text x="506" y="123">An answer</text>
+    <text x="506" y="153">An external act</text>
+    <text x="506" y="183">A withdrawal</text>
+  </g>
+  <g font-size="9.5" fill="var(--faint)" text-anchor="end">
+    <text x="684" y="63">most work</text>
+    <text x="684" y="93">refused</text>
+    <text x="684" y="123">research</text>
+    <text x="684" y="153">a setting, a deploy</text>
+    <text x="684" y="183">the Owner stops it</text>
+  </g>
+  <!-- fan lines from verification -->
+  <g stroke="var(--line2)" stroke-width="1.1" fill="none">
+    <path d="M486 59 H492"/>
+    <path d="M486 59 V89 H492"/>
+    <path d="M486 59 V119 H492"/>
+    <path d="M486 59 V149 H492"/>
+    <path d="M486 59 V179 H492"/>
+  </g>
+  <!-- acceptance sits after, and gates nothing -->
+  <rect x="4" y="212" width="464" height="42" rx="9" fill="none" stroke="var(--faint)" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <text x="20" y="230" font-size="12" font-weight="550" fill="var(--ink)">Acceptance</text>
+  <text x="20" y="246" font-size="10" fill="var(--faint)">the Owner reads afterwards · nothing waits for it · it gates nothing</text>
+  <g stroke="var(--line2)" stroke-width="1.3" fill="none" color="var(--line2)" marker-end="url(#lc-arrow)">
+    <path d="M594 194 V233 H472"/>
+  </g>
+  <g font-size="10.5" fill="var(--faint)">
+    <text x="4" y="284" fill="var(--dim)">No stage is recorded. Each is read off a fact the tracker already holds.</text>
+  </g>
+</svg>
+<figcaption>The fan is the point. Everything upstream of the verification is one path; what an item closes on depends on what it produced, and acceptance sits outside the flow entirely.</figcaption></figure>
+<h2 id="a-stage-is-a-passage-not-a-status">A stage is a passage, not a status <span class="tier rule">Rule</span></h2>
+<p>No stage is recorded anywhere. Framing is an item whose body carries no <code>Goal</code>; Planning is a <code>Goal</code> with no child items; Execution is an open branch or pull request; Verification is a pull request carrying an evidence package; Closing is the closing act; Acceptance is a closed item newer than the review mark. A stage that cannot be read off a fact the tracker already holds is not a stage in this method.</p>
+<h2 id="every-kind-runs-this-cycle-and-they-differ-at-two-points-only">Every kind runs this cycle, and they differ at two points only <span class="tier rule">Rule</span></h2>
+<p>There is one cycle, not six. What changes between a feature, a bug and a research question is where the work enters it and what act closes it — everything between those two points is identical, and identical on purpose: the stations are what make a result trustworthy, and no kind of work is exempt from them because it looked small.</p>
+<div class="wrap"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Enters at</th>
+<th>Produces</th>
+<th>Closes on</th>
+<th>Lives until</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feature</td>
+<td>Framing</td>
+<td>Tasks, and the plan that orders them</td>
+<td>Its last child leaving</td>
+<td>Its checklist is spent and no child is open</td>
+</tr>
+<tr>
+<td>Task</td>
+<td>Planning, inside its feature</td>
+<td>One pull request</td>
+<td>The merge, or a refusal</td>
+<td>Its closing act</td>
+</tr>
+<tr>
+<td>Bug</td>
+<td>Execution — the reproduction is already the goal</td>
+<td>One pull request, plus <code>Origin</code> and <code>Escaped</code></td>
+<td>The merge, or a refusal</td>
+<td>Its closing act</td>
+</tr>
+<tr>
+<td>Chore</td>
+<td>Execution — the title is already the end state</td>
+<td>One pull request</td>
+<td>The merge, or a refusal</td>
+<td>Its closing act</td>
+</tr>
+<tr>
+<td>Docs</td>
+<td>Execution, unless a feature cannot ship without it, which makes it that feature's task</td>
+<td>One pull request</td>
+<td>The merge, or a refusal</td>
+<td>Its closing act</td>
+</tr>
+<tr>
+<td>Research</td>
+<td>Framing — the question is what gets framed</td>
+<td>An answer, written where the item said it would be</td>
+<td>The answer existing there</td>
+<td>Its closing act</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two rows are worth reading twice. A <strong>feature closes when its last child leaves</strong> — by whichever door — and the party whose act emptied it closes it there; <a href="automation.html">Automation</a> owns the two questions that party answers first. And <strong>research closes without a merge</strong>, because a question that concludes &quot;do not build this&quot; has succeeded; its answer is its evidence, and the item states in advance where that answer will be written so the close is checkable rather than declared.</p>
+<p>Where a bug or a chore enters at Execution, it is because framing already happened — the reproduction or the title <em>is</em> the stated goal. That skip is the one <em>Framing ends with one sentence</em> governs, and it is earned rather than claimed.</p>
+<div class="why"><div class="lbl">Why</div>
+<p>A method that gave small work a shorter path would be read as a method that grades work by size, and everything would then arrive small. The path is one path; what differs is the act that ends it, and that is a property of what the work produced rather than of how much it was worth.</p></div>
+<h2 id="framing-ends-with-one-sentence">Framing ends with one sentence <span class="tier rule">Rule</span></h2>
+<p>Framing is finished when the goal names an observable end state and survives one test: write down two plausible readings, and if they would produce different acceptance criteria, it is not finished.</p>
+<p>A wish becomes that goal through converging questions put to the Owner, one at a time — the answer to the first changes what the second one is. Only questions the Owner alone can answer are asked: intent, priority, taste, risk. Everything technical is researched, decided without asking, and recorded in the feature's <code>Decided</code> line with the alternative it beat.</p>
+<p>What the questions ruled out is kept: it becomes the feature's boundary.</p>
+<p>An absent Owner does not block framing. Work proceeds on the best-evidenced reading, the unasked questions ship beside the plan, and the plan ruling treats an unconverged reading as what it is — a risk.</p>
+<p>Framing has two scales, like everything here. A wish that outgrows one feature goes to the Framer: research first, then features with their boundaries, their links, and a checklist in each body — and the Framer dissolves the moment that knowledge lands in the tracker, the Owner's commit being the verdict on its work.</p>
+<div class="exc"><div class="lbl">Exception</div>
+<p><strong>There is one exception.</strong> Framing is skipped when the goal arrives already stated — a bug with a reproduction, a chore whose end state is its own title — and the skip is earned, not claimed: two readings that differ on acceptance send even these back through framing.</p></div>
+<div class="why"><div class="lbl">Why</div>
+<p>A framing error fails last. The plan is faithful to the misreading, the implementation is faithful to the plan, and every check confirms that faithfulness — so the error is first detectable at acceptance, after every token is spent, by the one guardian whose attention the method exists to protect.</p></div>
+<h2 id="planning-resolves-uncertainty-first">Planning resolves uncertainty first <span class="tier rule">Rule</span></h2>
+<p>The feature is decomposed so that each task makes the next one specifiable: the first task is the one resolving the largest uncertainty a task can resolve. An uncertainty that is a question resolves as research instead — filed flat, blocking the feature by link.</p>
+<p>Slices are vertical: each passes through every layer it needs and is independently readable, so results reach the Owner one at a time instead of arriving as one batch at the end.</p>
+<p>A task is ready when it passes the cold-start test: a session with no other context can execute it. It names its acceptance criteria as observable outputs, the files or areas it touches, what is out of scope, and anything external it depends on — everything the item does not carry is rediscovered at token cost, or guessed.</p>
+<p>That payload is written at planning, into the feature's body under each checklist line. The line becomes the task's own item when work begins — it moves, and never copies.</p>
+<p>The plan is argued before it is priced. The plan ruling is what Planning passes on, and a deeper adversarial pass is bought only where a wrong approach would surface after implementation rather than during it. If two approaches that would have to be chosen between cannot be named, there is nothing for that pass to converge on, and running it anyway produces an endorsement the plan did not earn.</p>
+<h2 id="execution-is-one-session-against-one-item">Execution is one session against one item <span class="tier rule">Rule</span></h2>
+<p>The executor receives the task's item, the repository's standing instructions, and the handoff if one was written on the item — nothing else, because nothing else survives between sessions. Every technical decision is the executor's, recorded in the evidence package with the alternatives that existed; anything product-level, any change to the criteria, any breach of the boundary, and any new external dependency is escalated to the item while the code is still unwritten.</p>
+<h2 id="a-discovery-is-filed-now-and-done-next">A discovery is filed now and done next <span class="tier rule">Rule</span></h2>
+<p>Work discovered mid-task is filed at the moment of the discovery, and never folded into the running pull request. Inside the boundary it belongs to this pull request and is not a discovery at all; outside it — or ambiguous — the routing test gives it its place.</p>
+<p>What is filed is not parked: it is next. A discovery takes the freed slot ahead of any new scope, and where the unread limit blocks all starting it waits first in line — a position, not a parking lot. It yields to a critical item and to nothing else.</p>
+<p>The discoverer files, and the separations decide who does the work.</p>
+<p>Conditional work waits longer, on its Trigger line — <a href="classification.html">Classification</a> owns that rule. A limitation accepted for good is not filed at all: it is recorded beside the code it describes.</p>
+<h2 id="a-task-that-outgrows-one-pull-request-splits">A task that outgrows one pull request splits <span class="tier rule">Rule</span></h2>
+<p>A task that turns out to be bigger than one pull request is not one task. The executor stops and says so, and the Feature Lead splits it — the boundary is that accountability's line to write — never delivered large with an apology in the description.</p>
+<p>A task blocked mid-flight splits the same way: the pull request narrows to the slice it honestly delivers, the boundary is rewritten before the merge, and the remainder is a new task blocked by what stopped it.</p>
+<p>A second pull request on one task is never the answer — it is a decomposition error, and it is analysed like one.</p>
+<h2 id="verification-runs-cheapest-first">Verification runs cheapest first <span class="tier rule">Rule</span></h2>
+<p>No check forwards what an earlier check could have caught. Scripts run first and cost nothing but machine time; the verification runs on tokens against a change that already passes its tests; the Owner reads last, and only what the first two could not have judged.</p>
+<div class="why"><div class="lbl">Why</div>
+<p>The Owner's queue is served by one reader with no spare capacity, so the dominant loss is not a missed defect but the time work spends waiting there. A findings list padded with what a type-check would have caught makes the Owner read noise to find signal — at the one station that cannot absorb it.</p></div>
+<p>A verification finding has three dispositions: fixed in this task, filed with an item number in the evidence package, or refused. &quot;Noted&quot; is not a disposition — a finding with neither a fix, an item number, nor a refusal leaves nothing anything can act on, and nothing returns to it.</p>
+<p>A filed finding follows the discovery rule: it is work found in flight, first in line after the merge, never parked.</p>
+<h2 id="the-verification-can-refuse">The verification can refuse <span class="tier rule">Rule</span></h2>
+<p>Refusal is the disposition for a finding that filing cannot answer: the change does what it was asked to do, and what it was asked to do is wrong. A verifier that can only fix or file cannot stop anything, and a station that cannot stop anything is not a station.</p>
+<p>A refusal names the defect as one of the plan rather than the code, and it costs the work. The pull request closes unmerged, the task closes with the outcome <code>refused</code>, and the refusal is appended to the evidence package like any other verdict. The tokens are spent and the ledger records them; that is what the forecast is built from.</p>
+<p>The defect then goes where it belongs. The feature stays open and returns to planning, because a wrong plan is an outcome judged wrong — a refusal is the one act that never empties a parent, <a href="automation.html">Automation</a> says so — and the corrected work is new tasks under it, opened only once a new <code>Ruling</code> line reads <code>passed</code>. Where the plan was right and the item misread it, the finding is a bug against framing, carrying the <code>Escaped</code> line that says so.</p>
+<p>The verifier is the closing agent for a refusal, and it is the only act that makes it one. Nobody else can be: there is no merge, the Owner has not spoken, and the executor was dismissed when its session ended. So the same append that carries the verdict closes the item, and the ledger line is written from it.</p>
+<p>The verdict carries an <code>Escaped</code> line naming the station that let the approach through — the plan ruling, or the framing test where the goal itself was wrong. That is what puts a refusal into the census: it counts every item closed carrying that line, whatever type the item wears, so the station whose failure costs most is the one the feedback loop can finally see. Without it a refusal is invisible to everything except its ledger line, and a line that only said <code>abandoned</code> could not say what failed.</p>
+<p>A refusal is never overridden. The Owner may reopen the feature and instruct differently — that is their decision, made in the open, on a task that is already closed and already counted.</p>
+<div class="why"><div class="lbl">Why</div>
+<p>Two dispositions make every finding survivable by filing it, and filing is free. The one class of defect that must stop a merge — the approach itself being wrong — is exactly the class filing handles worst, because the item it files against is built on the thing it disputes. Without a refusal the verification is a comment, the check count is three where it is two, and the confidence the Owner is asked to extend rests on a station that was never able to withhold it.</p></div>
+<h2 id="the-merge-closes-and-nobody-waits">The merge closes, and nobody waits <span class="tier rule">Rule</span></h2>
+<p>On green gates and a verification that did not refuse, the pull request merges and the task closes with the merge. The evidence package is written before the verification and posted on the item no later than the merge, so the closed item carries it; the executor that merged the last task closes the feature, reading its <code>Ship condition</code> against what shipped as it goes.</p>
+<p>A task is never reopened — it records what became of one pull request, merged or refused, and that does not stop being true. A feature is reopened freely, because it records an outcome, and an outcome can be judged wrong later. Corrective work is always new tasks.</p>
+<div class="why"><div class="lbl">Why</div>
+<p>Holding a verified branch open for a human puts a wait on the critical path of every change, including every change that would have been approved without comment. The trunk stays deployable because unfinished work merges behind a switch in the code — which is also what makes interruption affordable.</p></div>
+<h2 id="acceptance-is-retrospective">Acceptance is retrospective <span class="tier rule">Rule</span></h2>
+<p>The Owner reads the evidence package after the work has closed, at a time of their choosing. Nothing waits for the reading, and no state is held open pending it.</p>
+<p>A reading that finds a problem has exactly two remedies: new items where what closed still stands, and a reopened feature where it does not. A reopened feature continues under its original statement, with new tasks.</p>
+<p>Reopening is the method working, not the method failing.</p>
+<div class="why"><div class="lbl">Why</div>
+<p>A check that held the merge would pay the full wait on every change, including all the ones that turn out to be fine. The reopen cost is paid only on the ones that are not, and the unread limit is what keeps that cost bounded.</p></div>
+<h2 id="starting-is-governed-by-the-unread-queue">Starting is governed by the unread queue <span class="tier rule">Rule</span></h2>
+<p>Work is started by how much is waiting to be read by the Owner, never by how many agents are available. The unread limit is two closed-but-unread results and one task in flight; nothing new starts while the queue is at it — not a smaller task, not an unrelated one, not &quot;to keep an agent busy&quot;.</p>
+<p>Unread is derived from one recorded fact — the review mark: the close moment of the newest item whose evidence the Owner has read, written once per reading pass by the agent acting on their instructions, and never overwritten. Everything closed after the newest mark is unread, and the count is a query. Reading leaves no trace of its own, so this is the one fact the method cannot derive and therefore records — on the event that produces it, and nowhere else. The mark is a high-water mark, so a reading pass reads oldest first: a newer item read before an older one would mark the older read unseen. A container's emptying is a close and counts like one: what the Owner reads for it is the closing comment — delivered against cut, and the <code>Ship condition</code> read against what shipped — which is the only place a feature's outcome is ever stated whole.</p>
+<p>The unread limit is never raised because agents are idle. Idle agents cost nothing — that is the whole benefit of an abundant resource — and occupying them converts a free surplus into queue depth at the one place that cannot absorb it. It is tuned on evidence, one step at a time: raised when the queue never once stood at the limit across a full period, lowered when the oldest unread item is older than the time a reading takes, twice in a row.</p>
+<p>Both readings come from close moments and review marks, so the tuning rests on no record kept for its own sake.</p>
+<div class="exc"><div class="lbl">Exception</div>
+<p><strong>There is one exception: a stream that adds nothing to the Owner's queue does not count against the limit.</strong> It parallelises freely, whatever the agent capacity, and everything else counts.</p></div>
+<p>The exception is carried on the item, by the <code>unread-exempt</code> flag, and nowhere else. Without it the count is a query over one predicate — closed after the mark — and that query counts exactly what the exception excludes, so the limit blocks on work that never reaches the Owner at all. The flag is set at the filing by whoever files, because that is when the reason is known; set later it is an excuse.</p>
+<p>Three streams qualify. Several independent attempts at one task add one result for N drafts.</p>
+<p>Work whose whole verification is the test suite — a codemod, a dependency bump — never reaches the Owner at all, and research delivers a conclusion rather than a diff.</p>
+<h2 id="an-incident-displaces-and-leaves-a-handoff">An incident displaces, and leaves a handoff <span class="tier rule">Rule</span></h2>
+<p>An urgent item enters flat: no parent, no home, framing skipped because the outage states the goal. It does not queue behind the starting limit — restoring service is not discretionary — but it takes the in-flight slot, and its change is verified, merged and read like any other.</p>
+<p>An incident is declared by whoever finds it. The Owner's word declares one outright; an absent Owner does not block it any more than they block framing — the agent that found it declares it, flags it <code>needs-owner</code>, and proceeds, and the Owner confirms or withdraws it on their return, which is a judgement on the agent's call and never a gate in front of the outage.</p>
+<p>An incident that outgrows one pull request becomes a feature by the route <a href="classification.html">Classification</a> states, and its tasks inherit the incident's standing: each takes the in-flight slot ahead of the queue, one at a time, and each is read like any other — the work whose outcome the Owner most needs to see is the last that leaves their queue.</p>
+<p>The interrupted session ends, and everything held only in it is lost. Before the slot is surrendered, a handoff is written on the interrupted task carrying the one thing a fresh session cannot re-derive — the approaches already tried and abandoned. The task is then restarted from its item plus that comment, never resumed: a session that believes it has context it does not have cannot know what it is missing.</p>
+
+  <div class="pager"><a href="artifacts.html"><div class="dir">← Previous</div><div class="nm">03 · Artifacts</div></a><a class="next" href="invariants.html"><div class="dir">Next →</div><div class="nm">05 · Invariants</div></a></div>
+  <div class="pagefoot"><span>Orrery Method — Directed AI development · 0.0.3</span><span>© 2026 Evgeniy Kovrov · MIT</span><span>Found an error? <a href="https://github.com/nyxene/orrery-method/issues/new?template=errata.yml">Report it.</a></span></div>
+</main>
+</div>
+<script>
+(()=>{
+  const links=[...document.querySelectorAll('nav .secs a')];
+  if(!links.length) return;
+  const byId=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const heads=[...byId.keys()].map(id=>document.getElementById(id)).filter(Boolean);
+  const last=links[links.length-1];
+  const mark=a=>{ if(!a) return; links.forEach(x=>x.classList.toggle('on',x===a)); };
+
+  // The final section can never satisfy the observer: a heading is highlighted
+  // while it sits in the top slice of the window, and once the page bottom is
+  // reached that heading has come to rest well below it. Scrolled to the end,
+  // the reader is looking at the last section whatever the observer believes.
+  const atEnd=()=>window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4;
+
+  const io=new IntersectionObserver(es=>{
+    if(atEnd()){ mark(last); return; }
+    for(const e of es) if(e.isIntersecting) mark(byId.get(e.target.id));
+  },{rootMargin:'-10% 0px -75% 0px'});
+  heads.forEach(h=>io.observe(h));
+
+  addEventListener('scroll',()=>{ if(atEnd()) mark(last); },{passive:true});
+  // Opened at the top, or too short to scroll at all, a page starts on section one.
+  if(!links.some(a=>a.classList.contains('on'))) mark(atEnd()?last:links[0]);
+})();
+</script>
+<script>
+document.getElementById('lang').addEventListener('change',e=>{
+  location.href='../'+e.target.value+'/'+(location.pathname.split('/').pop()||'index.html');
+});
+</script>
+<script>
+(()=>{
+  const root=document.documentElement, btn=document.getElementById('theme');
+  const saved=localStorage.getItem('method-theme');
+  if(saved) root.dataset.theme=saved;
+  btn.addEventListener('click',()=>{
+    const dark=root.dataset.theme ? root.dataset.theme==='dark'
+              : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme=dark?'light':'dark';
+    localStorage.setItem('method-theme',root.dataset.theme);
+  });
+})();
+</script>

@@ -1,0 +1,77 @@
+<svg viewBox="0 0 700 274">
+  <!-- four axes, one row each: what it answers, how many values an item carries -->
+  <g font-size="10.5" fill="var(--faint)" letter-spacing="1.4">
+    <text x="4" y="16">AXIS</text>
+    <text x="140" y="16">PER ITEM</text>
+    <text x="268" y="16">VALUES</text>
+  </g>
+  <line x1="4" y1="24" x2="696" y2="24" stroke="var(--line2)" stroke-width="1"/>
+
+  <!-- type -->
+  <text x="4" y="52" font-size="13" font-weight="550" fill="var(--ink)">type</text>
+  <text x="4" y="68" font-size="9.5" fill="var(--faint)">what kind of thing</text>
+  <text x="140" y="52" font-size="11.5" fill="var(--teal)">exactly one</text>
+  <g font-size="10.5" fill="var(--dim)">
+    <rect x="268" y="38" width="58" height="19" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.1"/>
+    <text x="297" y="47.5" text-anchor="middle" dominant-baseline="middle">feature</text>
+    <rect x="334" y="38" width="46" height="19" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.1"/>
+    <text x="357" y="47.5" text-anchor="middle" dominant-baseline="middle">task</text>
+    <rect x="388" y="38" width="42" height="19" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.1"/>
+    <text x="409" y="47.5" text-anchor="middle" dominant-baseline="middle">bug</text>
+    <rect x="438" y="38" width="52" height="19" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.1"/>
+    <text x="464" y="47.5" text-anchor="middle" dominant-baseline="middle">chore</text>
+    <rect x="498" y="38" width="66" height="19" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.1"/>
+    <text x="531" y="47.5" text-anchor="middle" dominant-baseline="middle">research</text>
+    <rect x="572" y="38" width="46" height="19" rx="9" fill="none" stroke="var(--teal)" stroke-width="1.1"/>
+    <text x="595" y="47.5" text-anchor="middle" dominant-baseline="middle">docs</text>
+  </g>
+  <text x="628" y="52" font-size="9.5" fill="var(--faint)">fixed at six</text>
+
+  <line x1="4" y1="80" x2="696" y2="80" stroke="var(--line)" stroke-width="1"/>
+
+  <!-- area -->
+  <text x="4" y="108" font-size="13" font-weight="550" fill="var(--ink)">area</text>
+  <text x="4" y="124" font-size="9.5" fill="var(--faint)">which part of the system</text>
+  <text x="140" y="108" font-size="11.5" fill="var(--soft)">at most one</text>
+  <text x="268" y="108" font-size="10.5" fill="var(--dim)">project-defined · each names a place that can be pointed at</text>
+  <text x="268" y="124" font-size="9.5" fill="var(--faint)">a value whose directories cannot be named is a topic, and topics belong in titles</text>
+  <text x="628" y="108" font-size="9.5" fill="var(--faint)">capped at eight</text>
+
+  <line x1="4" y1="140" x2="696" y2="140" stroke="var(--line)" stroke-width="1"/>
+
+  <!-- priority -->
+  <text x="4" y="168" font-size="13" font-weight="550" fill="var(--ink)">priority</text>
+  <text x="4" y="184" font-size="9.5" fill="var(--faint)">does urgency deviate</text>
+  <text x="140" y="168" font-size="11.5" fill="var(--soft)">at most one</text>
+  <g font-size="10.5" fill="var(--dim)">
+    <rect x="268" y="154" width="66" height="19" rx="9" fill="none" stroke="var(--rose)" stroke-width="1.1"/>
+    <text x="301" y="163.5" text-anchor="middle" dominant-baseline="middle">critical</text>
+    <rect x="342" y="154" width="46" height="19" rx="9" fill="none" stroke="var(--amber)" stroke-width="1.1"/>
+    <text x="365" y="163.5" text-anchor="middle" dominant-baseline="middle">high</text>
+    <rect x="396" y="154" width="44" height="19" rx="9" fill="none" stroke="var(--faint)" stroke-width="1.1"/>
+    <text x="418" y="163.5" text-anchor="middle" dominant-baseline="middle">low</text>
+  </g>
+  <text x="454" y="168" font-size="10.5" fill="var(--faint)">no middle — normal is carried by absence</text>
+  <text x="268" y="184" font-size="9.5" fill="var(--faint)">critical pre-empts what is in flight · high goes before new scope in the same area</text>
+
+  <line x1="4" y1="200" x2="696" y2="200" stroke="var(--line)" stroke-width="1"/>
+
+  <!-- flags -->
+  <text x="4" y="228" font-size="13" font-weight="550" fill="var(--ink)">flags</text>
+  <text x="4" y="244" font-size="9.5" fill="var(--faint)">which cross-cutting fact</text>
+  <text x="140" y="228" font-size="11.5" fill="var(--good)">any number</text>
+  <g font-size="10.5" fill="var(--dim)">
+    <rect x="268" y="214" width="72" height="19" rx="9" fill="none" stroke="var(--good)" stroke-width="1.1"/>
+    <text x="304" y="223.5" text-anchor="middle" dominant-baseline="middle">security</text>
+    <rect x="348" y="214" width="92" height="19" rx="9" fill="none" stroke="var(--good)" stroke-width="1.1"/>
+    <text x="394" y="223.5" text-anchor="middle" dominant-baseline="middle">needs-owner</text>
+    <rect x="448" y="214" width="58" height="19" rx="9" fill="none" stroke="var(--good)" stroke-width="1.1"/>
+    <text x="477" y="223.5" text-anchor="middle" dominant-baseline="middle">triage</text>
+    <rect x="514" y="214" width="100" height="19" rx="9" fill="none" stroke="var(--good)" stroke-width="1.1"/>
+    <text x="564" y="223.5" text-anchor="middle" dominant-baseline="middle">unread-exempt</text>
+  </g>
+  <text x="268" y="244" font-size="9.5" fill="var(--faint)">each flag is its own independent fact, so they do not compete for a slot</text>
+
+  <line x1="4" y1="258" x2="696" y2="258" stroke="var(--line2)" stroke-width="1"/>
+  <text x="4" y="272" font-size="10" fill="var(--faint)">There is no fifth axis. Status is derived, sizing is refused, sequencing lives in releases.</text>
+</svg>

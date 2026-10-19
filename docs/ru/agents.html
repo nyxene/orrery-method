@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents — Orrery Method</title>
+<meta name="description" content="Execution profile, для которого метод написан, — один человек над составом агентов. Ни один проект пока не работал по этому методу, поэтому это замысел, а не запись. Он иллюстрирует и ничего не обязывает: обязывают separations, а не эта комплектация.">
+<meta property="og:title" content="Agents — Orrery Method">
+<meta property="og:description" content="Execution profile, для которого метод написан, — один человек над составом агентов. Ни один проект пока не работал по этому методу, поэтому это замысел, а не запись. Он иллюстрирует и ничего не обязывает: обязывают separations, а не эта комплектация.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Orrery Method">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+/* Orrery Method — design tokens and components.
+   Any visual change starts here, never in the generated pages: the site is a
+   rendering, and editing a rendering is the two-sources failure this corpus
+   exists to prevent. */
+
+:root{
+  --bg:#08090A; --panel:#0E0F11; --panel2:#141517; --line:#1F2023; --line2:#2A2C30;
+  --ink:#F7F8F8; --dim:#9CA1A8; --faint:#62666D;
+  --accent:#5E6AD2; --soft:#7B85DE; --good:#4CB782; --amber:#D4A72C; --teal:#4EA8C9; --rose:#E0698C;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#FCFCFD; --panel:#FFF; --panel2:#F4F5F8; --line:#E4E6EA; --line2:#D3D6DB;
+    --ink:#0D0E10; --dim:#5A5F68; --faint:#8A8F98;
+    --soft:#4954C4; --good:#2F8F63; --amber:#A67C11; --teal:#2E7E9B; --rose:#B94A6B;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#FCFCFD; --panel:#FFF; --panel2:#F4F5F8; --line:#E4E6EA; --line2:#D3D6DB;
+  --ink:#0D0E10; --dim:#5A5F68; --faint:#8A8F98;
+  --soft:#4954C4; --good:#2F8F63; --amber:#A67C11; --teal:#2E7E9B; --rose:#B94A6B;
+}
+:root[data-theme="dark"]{
+  --bg:#08090A; --panel:#0E0F11; --panel2:#141517; --line:#1F2023; --line2:#2A2C30;
+  --ink:#F7F8F8; --dim:#9CA1A8; --faint:#62666D;
+  --soft:#7B85DE; --good:#4CB782; --amber:#D4A72C; --teal:#4EA8C9; --rose:#E0698C;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important} }
+
+body{margin:0;background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.7;
+     font-family:"Inter var","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+     letter-spacing:-.008em;-webkit-font-smoothing:antialiased}
+
+/* ---------- frame ---------- */
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0}
+@media(max-width:900px){.shell{grid-template-columns:1fr}}
+main{max-width:960px;padding:40px 48px 96px}
+main.title{padding:64px 48px 120px;margin:0 auto}
+@media(max-width:700px){main,main.title{padding:32px 24px 80px}}
+
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:34px 20px 40px 28px;border-right:1px solid var(--line)}
+@media(max-width:900px){nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}}
+.brand{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.brand .sp{flex:1}
+.brand a.home{display:flex;align-items:center;gap:9px;color:var(--ink);text-decoration:none;padding:0;margin:0;background:none;box-shadow:none}
+.mark{width:22px;height:22px;flex:none;color:var(--accent);display:block}
+.mark svg{width:100%;height:100%;display:block}
+.brand b{font-size:14px;font-weight:600;letter-spacing:-.01em}
+/* The slogan rides beside the name on every page: a reader landing mid-corpus
+   still learns what this is. It yields first when the row runs out of width. */
+.brand .slogan{
+  font-size:11.5px;color:var(--faint);letter-spacing:.02em;
+  padding-left:9px;margin-left:2px;border-left:1px solid var(--line2);
+  white-space:nowrap;
+}
+@media (max-width:640px){.brand .slogan{display:none}}
+.slogan-lg{
+  font-size:15px;color:var(--accent);letter-spacing:.03em;
+  margin:-6px 0 22px;font-weight:500;
+}
+.iconbtn{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex:none;
+         padding:0;margin:0;border:none;border-radius:6px;background:none;color:var(--faint);cursor:pointer;box-shadow:none}
+.iconbtn:hover{color:var(--ink);background:var(--panel2)}
+.iconbtn svg{width:15px;height:15px;display:block;margin:auto}
+a.iconbtn svg{width:14px;height:14px}
+/* Sits at the far end of the control row. It used to be indented to line up
+   under the name, which stopped meaning anything once the controls wrapped onto
+   their own line — the indent then read as a stray element rather than an
+   alignment. */
+.ver{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);
+     letter-spacing:.04em;margin:0 0 0 auto;align-self:center}
+
+/* One of the icon buttons, not a form field. The globe is the whole control;
+   the native select lies transparent over it, so any number of locales still
+   opens as a real menu and keyboard access is the platform's. */
+.langsel{position:relative;cursor:pointer;width:auto;gap:5px;padding:0 7px}
+.langsel svg{width:14px;height:14px;display:block;flex:none}
+/* Which locale is showing, said rather than implied — a globe alone asks the
+   reader to guess, and on a translated page that guess is the whole question. */
+.langsel .lc{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;
+         letter-spacing:.06em;line-height:1;font-weight:500}
+.langsel select{position:absolute;inset:0;width:100%;height:100%;
+         opacity:0;cursor:pointer;border:none;appearance:none;-webkit-appearance:none}
+.langsel:hover{color:var(--ink);background:var(--panel2)}
+.langsel:focus-within{color:var(--ink);outline:2px solid var(--accent);outline-offset:2px}
+
+/* The sidebar is a narrow column: the same brand row that fits the title page
+   breaks the name onto two lines there and clips the slogan. In the sidebar the
+   name keeps the first line to itself and the controls wrap beneath it; the
+   slogan stays on the title page and in every page footer, where there is room. */
+nav .brand{flex-wrap:wrap}
+nav .brand .slogan{display:none}
+nav .brand b{white-space:nowrap}
+nav .brand .sp{flex:0 0 100%;height:0;margin:0}
+nav .brand .langsel,nav .brand .iconbtn,nav .brand .ver{margin-top:10px}
+nav .brand{margin-bottom:22px}
+
+nav .g{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em;
+       text-transform:uppercase;color:var(--faint);padding:18px 10px 6px}
+nav a{display:flex;align-items:baseline;gap:8px;padding:5px 10px;margin:1px 0;border-radius:6px;
+      color:var(--dim);text-decoration:none;font-size:13.5px;transition:color .12s,background .12s}
+nav a:hover{color:var(--ink);background:var(--panel2)}
+nav a.on{color:var(--ink);background:var(--panel2);box-shadow:inset 2px 0 0 var(--accent)}
+nav a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+nav a .n, nav span.planned .n{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);width:14px;flex:none}
+nav span.planned{display:flex;align-items:baseline;gap:8px;padding:5px 10px;margin:1px 0;font-size:13.5px;color:var(--line2)}
+nav .secs{margin:2px 0 4px 17px;border-left:1px solid var(--line);padding-left:2px}
+nav .secs a{font-size:12.5px;padding:3px 10px;color:var(--faint)}
+nav .secs a:hover{color:var(--ink)}
+nav .secs a.on{box-shadow:none;background:none;color:var(--ink)}
+
+/* ---------- document header ---------- */
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:var(--faint);margin-bottom:8px}
+.crumb a{color:var(--dim);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:ui-monospace,Menlo,monospace;
+      font-size:11px;letter-spacing:.06em;color:var(--faint);
+      padding-bottom:26px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.meta b{color:var(--dim);font-weight:400}
+/* A lagging translation says so on its own face; silence would assert currency. */
+.meta .behind{color:var(--amber)}
+.meta .behind b{color:var(--amber);font-weight:500}
+.num{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:var(--accent);margin-bottom:12px}
+
+/* ---------- type ---------- */
+h1{font-size:42px;line-height:1.08;letter-spacing:-.032em;font-weight:600;margin:0 0 18px;text-wrap:balance}
+main.title h1{font-size:52px;line-height:1.05;letter-spacing:-.035em;margin-top:40px}
+h2{font-size:25px;line-height:1.25;letter-spacing:-.022em;font-weight:600;margin:0 0 14px;text-wrap:balance;
+   padding-top:44px;margin-top:36px;border-top:1px solid var(--line)}
+h3{font-size:16px;letter-spacing:-.012em;font-weight:600;margin:0 0 6px}
+p{margin:0 0 17px;color:var(--dim)}
+.lead{font-size:19px;line-height:1.6;color:var(--ink);letter-spacing:-.014em;margin:0 0 16px}
+main.title .lead{font-size:20px;letter-spacing:-.015em;margin-bottom:18px}
+strong{color:var(--ink);font-weight:550}
+hr{border:0;border-top:1px solid var(--line);margin:48px 0}
+ul,ol{margin:0 0 17px;padding-left:20px;color:var(--dim)}
+li{margin-bottom:5px}
+a{color:var(--soft)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.87em;background:var(--panel2);padding:.12em .4em;border-radius:4px;color:var(--ink)}
+
+/* ---------- normativity tier badge ---------- */
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;
+      letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid var(--line2);
+      color:var(--dim);vertical-align:4px;margin-left:10px}
+.tier.rule{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.tier.principle{color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+/* Standing rides beside force and never replaces it: Pending is the absence of
+   this badge, so the corpus's default state costs no ink and cannot go stale. */
+.standing{display:inline-block;vertical-align:middle;margin-left:6px;
+          font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.1em;
+          text-transform:uppercase;padding:2px 7px;border-radius:4px;
+          color:var(--good);border:1px solid color-mix(in srgb,var(--good) 45%,transparent)}
+.tier.guide{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 40%,transparent)}
+
+/* ---------- cards ---------- */
+.band{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--faint);margin:26px 0 10px}
+.cards{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:26px 0}
+.c{border:1px solid var(--line);border-radius:11px;padding:18px 19px;background:var(--panel);display:flex;flex-direction:column;gap:9px}
+.c .tag{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.c p{font-size:14.5px;margin:0;line-height:1.6}
+.c .foot{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+
+/* ---------- skeleton chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0}
+.chip{display:flex;align-items:baseline;gap:8px;padding:10px 16px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}
+.chip b{font-size:19px;font-weight:600;letter-spacing:-.02em}
+.chip span{font-size:13.5px;color:var(--dim)}
+
+/* ---------- tables ---------- */
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:22px 0;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--dim)}
+th{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:400}
+td:first-child{color:var(--ink);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+.wrap{overflow-x:auto}
+.wrap table{min-width:520px}
+
+/* ---------- figures ---------- */
+figure{margin:28px 0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{color:var(--faint);font-size:13.5px;margin-top:12px}
+
+/* ---------- rationale and exception ---------- */
+.why{border-left:2px solid var(--accent);padding:2px 0 2px 18px;margin:24px 0}
+.why .lbl{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.why p{margin:0;color:var(--ink);font-size:15px;line-height:1.65}
+.why p+p{margin-top:10px}
+.exc{border-left:2px solid var(--amber);padding:2px 0 2px 18px;margin:24px 0}
+.exc .lbl{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.exc p{margin:0;color:var(--ink);font-size:15px;line-height:1.65}
+
+/* ---------- numbered specification card ---------- */
+.spec{border:1px solid var(--line);border-radius:11px;background:var(--panel);overflow:hidden;margin:24px 0}
+.spec .hd{padding:11px 18px;border-bottom:1px solid var(--line);background:var(--panel2);
+          font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.spec ol{margin:0;padding:14px 18px 15px 36px;color:var(--dim);font-size:14.5px}
+.spec li{margin-bottom:7px}
+.spec li:last-child{margin-bottom:0}
+.spec li b{color:var(--ink);font-weight:550}
+
+/* ---------- pager and page footer ---------- */
+.pager{display:flex;gap:12px;margin-top:64px}
+.pager a{flex:1;border:1px solid var(--line);border-radius:11px;padding:15px 18px;
+         text-decoration:none;background:var(--panel);transition:background .12s}
+.pager a:hover{background:var(--panel2)}
+.pager span{flex:1}
+.pager .dir{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.pager .nm{font-size:15.5px;font-weight:550;color:var(--ink)}
+.pager a.next{text-align:right}
+.pagefoot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+          font-size:12.5px;color:var(--faint);display:flex;flex-wrap:wrap;gap:6px 24px}
+.pagefoot a{color:var(--dim)}
+
+/* ---------- title page: document standard ---------- */
+.standard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+          border:1px solid var(--line);border-radius:10px;margin:36px 0;overflow:hidden}
+.standard > div{padding:13px 16px;border-right:1px solid var(--line);background:var(--panel)}
+.standard > div:last-child{border-right:none}
+.standard .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.standard .v{font-size:14px;color:var(--ink);font-weight:500}
+.standard .v small{display:block;font-weight:400;font-size:12px;color:var(--faint)}
+@media(max-width:640px){.standard{grid-template-columns:1fr 1fr}.standard > div{border-bottom:1px solid var(--line)}}
+
+/* ---------- title page: collection map ---------- */
+.map{display:flex;flex-direction:column;gap:18px;margin:44px 0}
+.maplbl{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.15em;color:var(--faint);display:block;margin-bottom:8px}
+.mapboxes{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.map .box{border:1px solid var(--line2);border-radius:8px;padding:7px 13px;font-size:13px;font-weight:500;
+          color:var(--ink);background:var(--panel);text-decoration:none;display:inline-block;
+          transition:border-color .12s ease,color .12s ease,background .12s ease}
+a.box:hover,a.box:focus-visible{border-color:var(--accent);color:var(--accent);background:var(--panel2)}
+a.box:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.map .box{transition:none}}
+.map .box.dim{color:var(--faint);border-style:dashed;font-weight:400}
+.map .arr{color:var(--faint);font-size:12px}
+
+/* ---------- title page: parts ---------- */
+.part{margin:44px 0 0}
+.part-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.part-head .rn{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:var(--accent)}
+.part-head h2{font-size:22px;letter-spacing:-.02em;font-weight:600;margin:0;padding:0;border:0}
+.part > p{font-size:14.5px;margin:0 0 14px}
+.toc{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.toc .row{display:flex;align-items:baseline;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line);
+          background:var(--panel);color:var(--ink);text-decoration:none;transition:background .12s}
+.toc .row:last-child{border-bottom:none}
+.toc a.row:hover{background:var(--panel2)}
+.toc .row.planned .t{color:var(--faint)}
+.toc .n{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--faint);width:20px;flex:none}
+.toc .t{font-weight:550;font-size:15.5px;letter-spacing:-.01em}
+.toc .d{font-size:13.5px;color:var(--dim);margin-left:auto;text-align:right}
+@media(max-width:640px){.toc .d{display:none}}
+</style>
+<div class="shell">
+<nav>
+  <div class="brand"><a class="home" href="index.html"><span class="mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><radialGradient id="orrerySun" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#c7a6ff"/><stop offset=".5" stop-color="#7c86ea"/><stop offset="1" stop-color="#3fb7c9"/></radialGradient></defs><g fill="currentColor"><path d="M27.499 11.428 A12.375 12.375 0 1 1 20.572 4.501 A4.900 4.900 0 0 0 19.600 6.004 A10.625 10.625 0 1 0 25.996 12.400 A4.900 4.900 0 0 0 27.499 11.428 Z"/><circle cx="24.132" cy="7.868" r="2.5"/></g><g fill="url(#orrerySun)"><circle cx="16" cy="16" r="3.1"/></g></svg></span><b>Orrery Method</b></a><span class="slogan">Directed AI development</span><span class="sp"></span><label class="langsel iconbtn" title="Русский"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6.4"/><ellipse cx="8" cy="8" rx="2.9" ry="6.4"/><path d="M1.8 8h12.4M2.6 4.8h10.8M2.6 11.2h10.8"/></svg><span class="lc">RU</span><select id="lang" aria-label="Язык"><option value="en">English</option><option value="ru" selected>Русский</option></select></label><button class="iconbtn" id="theme" title="Сменить тему" aria-label="Сменить тему"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button><a class="iconbtn" href="https://github.com/nyxene/orrery-method" title="Репозиторий исходников" aria-label="Репозиторий исходников"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .2a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.23.48-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.67.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.66 7.66 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.24.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8 8 0 0 0 8 .2Z"/></svg></a><span class="ver">0.0.3</span></div>
+  <div class="g">I · Метод</div>
+  <a href="overview.html"><span class="n">01</span>Обзор</a>
+  <a href="roles.html"><span class="n">02</span>Роли</a>
+  <a href="artifacts.html"><span class="n">03</span>Артефакты</a>
+  <a href="cycle.html"><span class="n">04</span>Цикл</a>
+  <a href="invariants.html"><span class="n">05</span>Инварианты</a>
+  <div class="g">II · Справочник</div>
+  <a href="terms.html"><span class="n">06</span>Terms</a>
+  <a href="classification.html"><span class="n">07</span>Классификация</a>
+  <a href="measurement.html"><span class="n">08</span>Измерение</a>
+  <a href="automation.html"><span class="n">09</span>Автоматизация</a>
+  <a href="mapping.html"><span class="n">10</span>Привязки</a>
+  <div class="g">III · Практика</div>
+  <a href="playbooks.html"><span class="n">11</span>Сценарии</a>
+  <a href="agents.html" class="on"><span class="n">12</span>Agents</a>
+  <div class="secs"><a href="#каст">Каст</a>
+<a href="#почему-одна-session-на-task">Почему одна session на task</a>
+<a href="#параллельные-попытки">Параллельные попытки</a>
+<a href="#что-этот-профиль-подставляет-вместо">Что этот профиль подставляет вместо</a></div>
+  <div class="g">IV · Приложение</div>
+  <a href="application.html"><span class="n">13</span>Применение</a>
+</nav>
+
+<main>
+  <div class="crumb"><a href="index.html">Orrery Method</a><span>›</span><span>Часть III · Практика</span><span>›</span><span>Agents</span></div>
+  <div class="meta">
+    <span><b>ДОК</b> 12 / 13</span>
+    <span><b>ВЕРСИЯ</b> 0.0.3</span>
+    <span><b>ИЗМЕНЁН</b> 2026-10-19</span>
+    <span><b>ПЕРЕВОД</b> с EN v0.0.3</span>
+  </div>
+
+  <div class="num">12 · ПРАКТИКА</div>
+  <h1>Agents</h1>
+  <p class="lead">Execution profile, для которого метод написан, — один человек над составом агентов. Ни один проект пока не работал по этому методу, поэтому это замысел, а не запись. Он иллюстрирует и ничего не обязывает: обязывают separations, а не эта комплектация.</p>
+<h2 id="каст">Каст</h2>
+<p>Каждую accountability ниже Owner занимает агент, и ни один агент не занимает две на одном куске работы. Framer здесь агент: он ведёт framing в разговоре с Owner и растворяется, когда его результат ложится в трекер.</p>
+<p>Каст называет четыре оставшихся места: Planner — это место Feature Lead, Implementer — место executor, Critic держит plan ruling, а Auditor держит verification. Последним двум stations каст не нужен — gates это скрипты, а Owner читает.</p>
+<figure>
+<svg role="img" aria-label="Critic проверяет Planner, Auditor — Implementer, а Owner решает поверх обеих пар." viewBox="0 0 700 196">
+  <defs><marker id="arrow-pair" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 8 4 0 8z" fill="currentColor"/></marker></defs>
+  <g fill="none" stroke-width="1.4">
+    <rect x="4" y="22" width="150" height="46" rx="9" stroke="var(--teal)"/>
+    <rect x="212" y="22" width="150" height="46" rx="9" stroke="var(--amber)"/>
+    <rect x="4" y="122" width="150" height="46" rx="9" stroke="var(--soft)"/>
+    <rect x="212" y="122" width="150" height="46" rx="9" stroke="var(--good)"/>
+    <rect x="470" y="72" width="150" height="46" rx="9" stroke="var(--accent)"/>
+  </g>
+  <g font-size="13" font-weight="550">
+    <text x="24" y="43" fill="var(--teal)">Planner</text><text x="232" y="43" fill="var(--amber)">Critic</text>
+    <text x="24" y="143" fill="var(--soft)">Implementer</text><text x="232" y="143" fill="var(--good)">Auditor</text>
+    <text x="490" y="93" fill="var(--accent)">Owner</text>
+  </g>
+  <g font-size="10.5" fill="var(--faint)">
+    <text x="24" y="59">план</text><text x="232" y="59">судит его</text>
+    <text x="24" y="159">изменение</text><text x="232" y="159">проверяет его</text>
+    <text x="490" y="109">принимает или отвергает</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow-pair)" fill="none" opacity=".55">
+    <line x1="154" y1="45" x2="208" y2="45"/><line x1="154" y1="145" x2="208" y2="145"/>
+    <path d="M362 45 Q432 45 432 88 L466 88"/><path d="M362 145 Q432 145 432 102 L466 102"/>
+  </g>
+  <path d="M287 68 L287 122" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity=".35" fill="none" marker-end="url(#arrow-pair)"/>
+  <text x="297" y="99" font-size="10.5" fill="var(--faint)">утверждённый план</text>
+  <text x="545" y="150" font-size="10.5" fill="var(--dim)" text-anchor="middle">ни одна роль не проверяет собственный выход</text>
+</svg>
+<figcaption>Два производителя, два проверяющих и один человек над обеими парами. Ни один агент не встречается дважды подряд.</figcaption></figure>
+<div class="cards">
+<div class="c"><div class="tag">Производит</div><h3>Planner</h3><p>Агент на feature. Он читает код и источники прежде, чем написать строку плана, и отдаёт план Critic, с которым никогда не разговаривал.</p><div class="foot">Одна feature, один planner, входящий заново каждый раз, когда план растёт.</div></div>
+<div class="c"><div class="tag">Производит</div><h3>Implementer</h3><p>Один агент, одна session, одна task. Он начинает без памяти о любой прежней session, получает item и standing instructions — и больше для него не существует ничего.</p><div class="foot">Прерванный, он пишет handoff прежде, чем сдать слот.</div></div>
+<div class="c"><div class="tag">Проверяет</div><h3>Critic</h3><p>Агент, не писавший план. Глубокая петля — planner, архитектор, critic, до одобрения — покупается только там, где неверный подход всплыл бы после реализации.</p><div class="foot">Один вердикт, записанный на feature.</div></div>
+<div class="c"><div class="tag">Проверяет</div><h3>Auditor</h3><p>Агент на другой модели, чем Implementer. Два прогона одной модели делят слепые пятна; дефект, переживающий проверку, — тот, что общий у обеих parties.</p><div class="foot">Его вердикт дописывается в evidence package и никогда не правится внутрь.</div></div>
+</div>
+<h2 id="почему-одна-session-на-task">Почему одна session на task</h2>
+<p>Boundary у session — форсирующая функция этого профиля для cold-start test: Implementer, начинающий без памяти, не может опереться ни на что, чего item не несёт, и недоописанная task падает громко на первом шаге, а не молча на последнем.</p>
+<p>Это же делает прерывание дешёвым. Session не держит ничего долговечного, так что её конец теряет лишь то, что правило handoff и так сохраняет, — испробованные и отброшенные подходы.</p>
+<h2 id="параллельные-попытки">Параллельные попытки</h2>
+<p>Несколько Implementer могут взять одну task параллельно, каждый в своей session и своём рабочем дереве, и остаётся лучший результат. N попыток добавляют один item в очередь unread Owner, так что лимит не тронут, — это то исключение, которое называет Цикл, разыгранное сознательно.</p>
+<h2 id="что-этот-профиль-подставляет-вместо">Что этот профиль подставляет вместо</h2>
+<p>Спецификация профиля требует различимых parties, и этот профиль поставляет их через session, а не через credential. Каждый агент действует под одним credential, поэтому какой аккаунт занимал station — постфактум не показать; но каждое место работает своей session, каждая session называет себя, и строки <code>Parties</code> и <code>Ruling</code> несут эти имена. Счётчики токенов читаются из отчёта среды об использовании для каждой из этих sessions, на закрытии.</p>
+<p>Вместо личности он подставляет сам диспатч. Каждое место запускается своей session против своего входа, поэтому party никогда не получает работу, которую произвела сама: separations держатся в момент выдачи, а не в момент осмотра.</p>
+<p>Потребитель, чьи parties оставляют различимые личности, получает первые три separations проверяемыми фактами. Этот профиль получает их свойством того, как запускаются sessions, а четвёртую — записанным фактом: sessions, названные в <code>Framed</code>, <code>Planned</code>, <code>Ruling</code> и <code>Parties</code>, — по две на каждую проверку — и есть то, чего требует четвёртая separation, и это то, что этот профиль показать может. Он называет эту разницу, а не утверждает более сильное.</p>
+
+  <div class="pager"><a href="playbooks.html"><div class="dir">← Назад</div><div class="nm">11 · Сценарии</div></a><a class="next" href="application.html"><div class="dir">Далее →</div><div class="nm">13 · Применение</div></a></div>
+  <div class="pagefoot"><span>Orrery Method — Directed AI development · 0.0.3</span><span>© 2026 Evgeniy Kovrov · MIT</span><span>Нашли ошибку? <a href="https://github.com/nyxene/orrery-method/issues/new?template=errata.yml">Сообщите.</a></span></div>
+</main>
+</div>
+<script>
+(()=>{
+  const links=[...document.querySelectorAll('nav .secs a')];
+  if(!links.length) return;
+  const byId=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const heads=[...byId.keys()].map(id=>document.getElementById(id)).filter(Boolean);
+  const last=links[links.length-1];
+  const mark=a=>{ if(!a) return; links.forEach(x=>x.classList.toggle('on',x===a)); };
+
+  // The final section can never satisfy the observer: a heading is highlighted
+  // while it sits in the top slice of the window, and once the page bottom is
+  // reached that heading has come to rest well below it. Scrolled to the end,
+  // the reader is looking at the last section whatever the observer believes.
+  const atEnd=()=>window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4;
+
+  const io=new IntersectionObserver(es=>{
+    if(atEnd()){ mark(last); return; }
+    for(const e of es) if(e.isIntersecting) mark(byId.get(e.target.id));
+  },{rootMargin:'-10% 0px -75% 0px'});
+  heads.forEach(h=>io.observe(h));
+
+  addEventListener('scroll',()=>{ if(atEnd()) mark(last); },{passive:true});
+  // Opened at the top, or too short to scroll at all, a page starts on section one.
+  if(!links.some(a=>a.classList.contains('on'))) mark(atEnd()?last:links[0]);
+})();
+</script>
+<script>
+document.getElementById('lang').addEventListener('change',e=>{
+  location.href='../'+e.target.value+'/'+(location.pathname.split('/').pop()||'index.html');
+});
+</script>
+<script>
+(()=>{
+  const root=document.documentElement, btn=document.getElementById('theme');
+  const saved=localStorage.getItem('method-theme');
+  if(saved) root.dataset.theme=saved;
+  btn.addEventListener('click',()=>{
+    const dark=root.dataset.theme ? root.dataset.theme==='dark'
+              : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme=dark?'light':'dark';
+    localStorage.setItem('method-theme',root.dataset.theme);
+  });
+})();
+</script>

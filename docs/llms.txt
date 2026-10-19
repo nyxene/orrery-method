@@ -1,0 +1,22 @@
+# Orrery Method
+
+> A way of running a software project where the work is done by AI agents, and one person directs, judges, and decides.
+
+Version 0.0.3 · MIT · https://github.com/nyxene/orrery-method
+
+## Docs
+
+- [The whole methodology as one markdown document](method.md)
+- [Overview](en/overview.html): what is scarce, and what follows from it
+- [Roles](en/roles.html): three accountabilities, four stations, and the one human at the top
+- [Artifacts](en/artifacts.html): the four things that exist
+- [The cycle](en/cycle.html): six stages, and what each one hands to the next
+- [Invariants](en/invariants.html): the eight properties that always hold, and the tooling that checks them
+- [Terms](en/terms.html): the vocabulary, fixed in English for every locale
+- [Classification](en/classification.html): the four axes, and where every kind of work is routed
+- [Measurement](en/measurement.html): the ledger, the cost model, and what a forecast is worth
+- [Automation](en/automation.html): what is enforced, what is derived, and what must never be built
+- [Mapping](en/mapping.html): two bindings in full, four more as their differences
+- [Playbooks](en/playbooks.html): the method walked end to end
+- [Agents](en/agents.html): one way to staff the accountabilities and stations — the one this method grew up under
+- [Application](en/application.html): how a project takes the method up, and one tool that follows it

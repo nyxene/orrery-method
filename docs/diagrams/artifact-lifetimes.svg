@@ -1,0 +1,21 @@
+<svg viewBox="0 0 700 176">
+  <g font-size="11.5" fill="var(--dim)">
+    <text x="0" y="30">Task</text><text x="0" y="68">Feature</text><text x="0" y="106">Evidence</text><text x="0" y="144">Ledger</text>
+  </g>
+  <g stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="96" y1="26" x2="286" y2="26" stroke="var(--soft)"/>
+    <line x1="96" y1="64" x2="452" y2="64" stroke="var(--teal)"/>
+    <line x1="286" y1="102" x2="560" y2="102" stroke="var(--good)"/>
+    <line x1="286" y1="140" x2="620" y2="140" stroke="var(--amber)"/>
+  </g>
+  <g font-size="10.5" fill="var(--faint)">
+    <text x="296" y="30">merged</text><text x="462" y="68">closed</text>
+    <text x="570" y="106">kept</text><text x="630" y="144">kept</text>
+  </g>
+  <g stroke="var(--line2)" stroke-width="1" stroke-dasharray="2 4">
+    <line x1="286" y1="12" x2="286" y2="156"/><line x1="452" y1="12" x2="452" y2="156"/>
+  </g>
+  <g font-size="10" fill="var(--faint)" text-anchor="middle">
+    <text x="286" y="170">merge</text><text x="452" y="170">last task</text>
+  </g>
+</svg>

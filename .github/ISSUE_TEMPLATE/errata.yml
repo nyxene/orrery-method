@@ -1,0 +1,63 @@
+name: Found an error
+description: A sentence that is wrong, a contradiction between two documents, a term used in the wrong sense, or a rule that cannot be followed as written.
+title: "[errata] "
+labels: [errata]
+body:
+  - type: dropdown
+    id: document
+    attributes:
+      label: Document
+      options:
+        - 01 Overview
+        - 02 Roles
+        - 03 Artifacts
+        - 04 The cycle
+        - 05 Invariants
+        - 06 Terms
+        - 07 Classification
+        - 08 Measurement
+        - 09 Automation
+        - 10 Mapping
+        - 11 Playbooks
+        - 12 Agents
+        - 13 Application
+        - README / site
+    validations:
+      required: true
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Locale
+      options:
+        - English
+        - Русский
+        - both
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: The heading the sentence sits under.
+      placeholder: "The evidence package is a closed form"
+    validations:
+      required: true
+  - type: textarea
+    id: quote
+    attributes:
+      label: What it says
+      description: Quote the sentence as written.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong with it
+      description: A contradiction — name the other document. A rule that cannot be followed — say what happened when you tried.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What it should say
+      description: Optional. The wording you would put there instead.

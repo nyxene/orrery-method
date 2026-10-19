@@ -1,0 +1,27 @@
+<svg viewBox="0 0 700 196">
+  <defs><marker id="arrow-pair" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 8 4 0 8z" fill="currentColor"/></marker></defs>
+  <g fill="none" stroke-width="1.4">
+    <rect x="4" y="22" width="150" height="46" rx="9" stroke="var(--teal)"/>
+    <rect x="212" y="22" width="150" height="46" rx="9" stroke="var(--amber)"/>
+    <rect x="4" y="122" width="150" height="46" rx="9" stroke="var(--soft)"/>
+    <rect x="212" y="122" width="150" height="46" rx="9" stroke="var(--good)"/>
+    <rect x="470" y="72" width="150" height="46" rx="9" stroke="var(--accent)"/>
+  </g>
+  <g font-size="13" font-weight="550">
+    <text x="24" y="43" fill="var(--teal)">Planner</text><text x="232" y="43" fill="var(--amber)">Critic</text>
+    <text x="24" y="143" fill="var(--soft)">Implementer</text><text x="232" y="143" fill="var(--good)">Auditor</text>
+    <text x="490" y="93" fill="var(--accent)">Owner</text>
+  </g>
+  <g font-size="10.5" fill="var(--faint)">
+    <text x="24" y="59">план</text><text x="232" y="59">судит его</text>
+    <text x="24" y="159">изменение</text><text x="232" y="159">проверяет его</text>
+    <text x="490" y="109">принимает или отвергает</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow-pair)" fill="none" opacity=".55">
+    <line x1="154" y1="45" x2="208" y2="45"/><line x1="154" y1="145" x2="208" y2="145"/>
+    <path d="M362 45 Q432 45 432 88 L466 88"/><path d="M362 145 Q432 145 432 102 L466 102"/>
+  </g>
+  <path d="M287 68 L287 122" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity=".35" fill="none" marker-end="url(#arrow-pair)"/>
+  <text x="297" y="99" font-size="10.5" fill="var(--faint)">утверждённый план</text>
+  <text x="545" y="150" font-size="10.5" fill="var(--dim)" text-anchor="middle">ни одна роль не проверяет собственный выход</text>
+</svg>
