@@ -4,7 +4,7 @@ tagline: three accountabilities, four stations, and the one human at the top
 lead: Three accountabilities carry the work, and their lifetimes differ on purpose — one is permanent, one exists for a moment, one lives with its feature. Beside them stand four stations every execution keeps.
 ---
 
-## Three accountabilities carry the work {rule}
+## Three accountabilities carry the work · *Rule*
 
 Each of the three decides something no other decides, and the method names what each one is, never who holds it.
 
@@ -22,7 +22,7 @@ Runs one committed feature from start to ship: turns its goal into tasks just in
 - Appears at the commit, closes with the feature.
 ```
 
-## Authority is not shared {rule}
+## Authority is not shared · *Rule*
 
 Each decision belongs to exactly one accountability. The others advise, dispute, or execute — they do not overrule.
 
@@ -35,7 +35,7 @@ Each decision belongs to exactly one accountability. The others advise, dispute,
 > [!EXCEPTION]
 > **There is one exception.** The Owner overrules any verdict on licensing or business risk, because that judgement is theirs by definition.
 
-## Four stations guard the flow {rule}
+## Four stations guard the flow · *Rule*
 
 A defect must pass three unrelated checks before anything is built on it and a fourth after it ships, each held by a party independent of what it checks. That is what makes a result trustworthy without the Owner reading a diff — and what makes retrospective acceptance safe at all.
 
@@ -51,7 +51,7 @@ The plan ruling is passed twice, because planning happens twice: once on a Frame
 > [!WHY]
 > When one party produces and the same party checks, the failure that survives is the one they share. Independence breaks the correlation — the ruling has no stake in the plan, the verifier did not write the code, the gates hold no opinion, and the Owner brings context nothing else has.
 
-## The separations are what bind {rule}
+## The separations are what bind · *Rule*
 
 Four pairings are forbidden, and they are the whole of what an execution profile may not arrange away.
 
@@ -79,7 +79,7 @@ Its own limits — what it arranges by construction and cannot show once the wor
 
 [Agents](12-agents.md) is one profile: the one this method was written for. It has not been run — no project has yet worked to this method — so it illustrates a design rather than a practice, and this document is what binds.
 
-## The Owner does not operate the tracker {rule}
+## The Owner does not operate the tracker · *Rule*
 
 Every item, classification, link, release and reopening is performed by an agent. The Owner reads, judges, and instructs in words.
 

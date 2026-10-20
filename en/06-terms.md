@@ -6,7 +6,7 @@ tagline: the vocabulary, fixed in English for every locale
 lead: Every term below is normative and binds every other document. A term is never translated — a locale translates the prose around it, and the term itself stays English on every page, in every language.
 ---
 
-## The terms {rule}
+## The terms · *Rule*
 
 One term, one meaning, one line. A document using one of these words uses it in exactly this sense; a document needing a different sense needs a different word.
 
@@ -64,7 +64,7 @@ One term, one meaning, one line. A document using one of these words uses it in 
 | refusal | The verification's third disposition: the change does what was asked and what was asked is wrong. The pull request closes unmerged and the task closes `refused` |
 | conformance | The six statements a project meets to claim the method. The [Overview](01-overview.md) owns them |
 
-## Terms are never translated {rule}
+## Terms are never translated · *Rule*
 
 The English term is the identifier, in every locale. Prose around it may be in any language; the word itself does not change, so a reader of any locale meets the same string the queries, the classifications and the other locales use.
 

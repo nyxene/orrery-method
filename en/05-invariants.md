@@ -4,7 +4,7 @@ tagline: the eight properties that always hold, and the tooling that checks them
 lead: Eight properties hold in every valid state of the tracker, and a structure that violates one is a defect, whoever produced it. The consistency check rules on what the tracker shows; a violation it cannot see is still a violation.
 ---
 
-## The eight invariants {rule}
+## The eight invariants · *Rule*
 
 A structure that breaks one of these is defective, whoever produced it and however green everything else reads.
 
@@ -19,7 +19,7 @@ One fact, one home — nothing is recorded in two places.
 Items, their classification and their state are the source of truth — every board, view and chart is a rendering, deletable and rebuildable without loss.
 ```
 
-## History before a rule does not refute it {rule}
+## History before a rule does not refute it · *Rule*
 
 Two corpora have been counted against invariant 1, and both report it true of most work rather than all: 3 of 22 pull-request-closed items in one, 17 of 250 in the other. Neither count is a counter-example, and the reason is not a defence of the invariant but a fact about the measurement.
 
@@ -29,7 +29,7 @@ This is stated here rather than left for a reader to rediscover, because the num
 
 The same holds for every count in the evidence base taken before its rule existed. When work produced *under* the convention breaks an invariant, that is a different thing entirely, and it enters the analysis a bug gets.
 
-## Two live levels {rule}
+## Two live levels · *Rule*
 
 The hierarchy is a feature and its tasks. Releases sit above as membership rather than parentage, holding what ships together; nothing sits below.
 
@@ -40,7 +40,7 @@ An item with no parent is a **flat item** — a bug, a chore, a research questio
 > [!WHY]
 > With no parent, a feature's tasks are related only by a prefix in their titles, and "what remains" stops being answerable except by reading. With a third level, every grouping view starts duplicating rows, and every added level is one more structure that must be kept true. Two is where both failures are avoided.
 
-## The last child closes its parent {rule}
+## The last child closes its parent · *Rule*
 
 A task's closure is forced by the platform: the merge closes it. A parent's closure is forced by nothing, so it is performed by the party at the event — whoever's act left it with no open child closes it, having answered the two questions [Automation](09-automation.md) states.
 
@@ -49,20 +49,20 @@ That document owns the procedure. This invariant says only that the transition h
 > [!WHY]
 > Zombie parents are how hierarchies rot: every child done, the parent open, its progress reading as unfinished forever. The transition nothing forces is exactly the one that goes unperformed.
 
-## A deferred task is promoted {rule}
+## A deferred task is promoted · *Rule*
 
 Deferring a task to a later release means promoting it to a feature there, or re-attaching it to a feature still open. It is never left on a parent that shipped.
 
 A shipped feature with an open child reports false progress permanently. The record of what a release contained is the one history the tracker holds, and an orphan falsifies it.
 
-## One fact, one home {rule}
+## One fact, one home · *Rule*
 
 Any fact lives in exactly one primitive. The plan lives in the feature, the type lives in its classification, the state lives in the item — and no fact is recorded twice.
 
 > [!WHY]
 > The tracker never compares two copies of a fact, so they diverge silently and every consumer trusts a different one. The failure produces no signal until a decision lands on the stale copy.
 
-## Ceilings are lower than limits {guide}
+## Ceilings are lower than limits · *Guide*
 
 Every primitive stops communicating long before the platform stops permitting it. The method treats the useful ceiling as the limit, and the platform's number as irrelevant.
 
@@ -75,7 +75,7 @@ Every primitive stops communicating long before the platform stops permitting it
 
 Exceeding a ceiling raises no error. It produces a structure that is technically valid and no longer readable — a worse failure than an error, because nothing announces it.
 
-## The check runs, memory does not {rule}
+## The check runs, memory does not · *Rule*
 
 Every invariant is ruled on by the consistency check, never by anyone's intention. These eight describe a state rather than an act, so they ride no event of their own and nothing makes them visible as they break — and breaking one costs the breaker nothing, because a false rollup bills whoever reads it next.
 

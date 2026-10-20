@@ -1,4 +1,4 @@
-# Orrery Method 0.0.3
+# Orrery Method 0.0.4
 
 > Directed AI development. A way of running a software project where the work is done by AI agents, and one person directs, judges, and decides.
 
@@ -22,7 +22,7 @@ measured in tokens and recorded at every close.
 8 | invariants
 ```
 
-## What is scarce {principle}
+## What is scarce · *Principle*
 
 Implementation capacity is not the constraint. Agents produce changes faster than anyone can examine them, and adding more of them moves nothing.
 
@@ -33,7 +33,7 @@ Justified confidence is what those two buy: warranted trust in a result nobody r
 > [!WHY]
 > Optimising throughput in a system whose bottleneck is verification produces more unverified work, which is worth less than none: it still has to be examined, and now there is more of it.
 
-## Confidence is manufactured {principle}
+## Confidence is manufactured · *Principle*
 
 The Owner accepts a result they did not read because four independent checks stand around it — three before anything is built on it, one after. Each catches a class of failure the others cannot, and no two share a failure mode — because no two share a context. [Roles](#2-roles) states the separation that delivers that; without it the checks are one judgement counted four times.
 
@@ -41,7 +41,7 @@ The Owner accepts a result they did not read because four independent checks sta
 
 Trust follows from the arrangement, not from any single verdict. [Roles](#2-roles) states what each station catches and what disqualifies a party from holding it.
 
-## Derive, do not maintain {rule}
+## Derive, do not maintain · *Rule*
 
 Every answer is computed at the moment of asking, from state that exists for another reason.
 
@@ -52,7 +52,7 @@ Maintaining an answer is permitted only where derivation is impossible, and the 
 > [!WHY]
 > A status field is wrong from the moment reality moves, and it announces nothing. The same fact is already in the branch, the pull request and the merge — asking those costs one query and cannot lie.
 
-## What binds, and what does not {rule}
+## What binds, and what does not · *Rule*
 
 Every statement carries its force on its face. The badge beside a heading is the whole of its authority.
 
@@ -66,11 +66,11 @@ Unbadged prose explains. It binds nothing, and no tooling reads it.
 
 A badge is required wherever force exists and forbidden where it does not: every section of Method and Reference carries one, and no section of Practice does. Practice illustrates, so it has no force to declare, and a badge there would assert one. The build holds both halves of that.
 
-## Force and standing are different axes {rule}
+## Force and standing are different axes · *Rule*
 
 Force is what deviating costs. Standing is whether practice has confirmed the section yet. They are independent, and collapsing them into one badge is how a corpus stops binding anything.
 
-Every section carries a standing, and it is written where the force badge is. **Proven** — a real feature has been carried through it unchanged — is written as a second word: `{rule proven}`. **Pending** is the absence of that word, because it is the default and a default nobody has to write cannot drift out of date.
+Every section carries a standing, and it is written where the force badge is. **Proven** — a real feature has been carried through it unchanged — is written as a second word: `· *Rule, proven*`. **Pending** is the absence of that word, because it is the default and a default nobody has to write cannot drift out of date.
 
 Pending never softens force. A Pending Rule binds exactly as a Proven one does, and deviating from it is a defect, not a licensed experiment. What Pending adds is that the deviation is *also* evidence: it is filed as a bug against the corpus, its `Escaped` line naming the section that failed to hold.
 
@@ -79,7 +79,7 @@ Standing changes on an event, never on attention. The census at a release close 
 > [!WHY]
 > A corpus that marks itself unproven and licenses deviation on that ground can be adopted whole, obeyed nowhere, and reported as compliant. Marking the same fact without touching force keeps the honesty and removes the escape: the reader knows what has been tested, and owes the method the same obedience either way.
 
-## What conformance requires {rule}
+## What conformance requires · *Rule*
 
 A project conforms when all six hold. Nothing else is asked, and none of the six is waived by a section being Pending.
 
@@ -96,7 +96,7 @@ Each is checkable against the tracker and the repository, by someone who was not
 
 A project may take the parts it wants and leave the rest. What it may not do is take the parts and keep the name.
 
-## Conformance is ruled on, not asserted {rule}
+## Conformance is ruled on, not asserted · *Rule*
 
 A criterion nobody applies is a preference with a table around it, so the six are put to a party rather than left to the reader's conscience.
 
@@ -107,7 +107,7 @@ It holds until the next release close and no longer. Conformance is a statement 
 > [!WHY]
 > The moment conformance can be claimed without being ruled on, the claim costs nothing and means nothing, and the six criteria become decoration on a page nobody checks against. Riding the release close puts the ruling on an event that already has an actor, a record and an audience, so it is obeyed as a side effect of shipping rather than by anyone remembering to be honest.
 
-## The tracker holds four facts, and derives the rest {rule}
+## The tracker holds four facts, and derives the rest · *Rule*
 
 An item carries its body, its classification, its parent if it has one, and whether it is open or closed. Nothing else is stored about it, ever. Every question a board answers — what stage is this at, how far along is that, what is in progress — is computed from those four at the moment of asking.
 
@@ -122,7 +122,7 @@ There is no status field. Its absence is a decision this method is built on rath
 
 How the four are physically recorded — a label, a field, a native type, a link — is the tracker's business, settled per tracker in [Mapping](#10-mapping). Nothing on this page depends on the answer, which is what lets the method outlive a change of tooling.
 
-## A rule rides an event, or it rides attention {principle}
+## A rule rides an event, or it rides attention · *Principle*
 
 A rule holds when it is attached to something that happens anyway and leaves a trace behind. The ledger rides the close, the handoff rides the interruption, the evidence package rides the merge: each is obeyed as a side effect of work already being done, and each neglect shows up as a missing artifact.
 
@@ -131,7 +131,7 @@ A rule attached to no event, or to an event that leaves nothing behind, is carri
 > [!WHY]
 > Human methods lean on habit and on a cost the breaker eventually feels. A party that begins each session with no memory has neither, so a norm here converts to structure or it evaporates. Adding a rule therefore begins with finding the event it can ride, never with wording it more firmly.
 
-## The boundary {rule}
+## The boundary · *Rule*
 
 The method covers one person directing agents against one codebase. Outside that it states nothing, and it does not extend by analogy.
 
@@ -147,7 +147,7 @@ The method covers one person directing agents against one codebase. Outside that
 
 Exclusion is not disapproval. These are answers to questions this method does not have.
 
-## How to read this {rule}
+## How to read this · *Rule*
 
 A document's part decides its force: **Method** is normative and read in order, once; **Reference** is looked up, never read through; **Practice** illustrates and binds nothing.
 
@@ -161,7 +161,7 @@ The shortest useful path is this page, then [Roles](#2-roles), then [Playbooks](
 
 *Three accountabilities carry the work, and their lifetimes differ on purpose — one is permanent, one exists for a moment, one lives with its feature. Beside them stand four stations every execution keeps.*
 
-## Three accountabilities carry the work {rule}
+## Three accountabilities carry the work · *Rule*
 
 Each of the three decides something no other decides, and the method names what each one is, never who holds it.
 
@@ -179,7 +179,7 @@ Runs one committed feature from start to ship: turns its goal into tasks just in
 - Appears at the commit, closes with the feature.
 ```
 
-## Authority is not shared {rule}
+## Authority is not shared · *Rule*
 
 Each decision belongs to exactly one accountability. The others advise, dispute, or execute — they do not overrule.
 
@@ -192,7 +192,7 @@ Each decision belongs to exactly one accountability. The others advise, dispute,
 > [!EXCEPTION]
 > **There is one exception.** The Owner overrules any verdict on licensing or business risk, because that judgement is theirs by definition.
 
-## Four stations guard the flow {rule}
+## Four stations guard the flow · *Rule*
 
 A defect must pass three unrelated checks before anything is built on it and a fourth after it ships, each held by a party independent of what it checks. That is what makes a result trustworthy without the Owner reading a diff — and what makes retrospective acceptance safe at all.
 
@@ -208,7 +208,7 @@ The plan ruling is passed twice, because planning happens twice: once on a Frame
 > [!WHY]
 > When one party produces and the same party checks, the failure that survives is the one they share. Independence breaks the correlation — the ruling has no stake in the plan, the verifier did not write the code, the gates hold no opinion, and the Owner brings context nothing else has.
 
-## The separations are what bind {rule}
+## The separations are what bind · *Rule*
 
 Four pairings are forbidden, and they are the whole of what an execution profile may not arrange away.
 
@@ -236,7 +236,7 @@ Its own limits — what it arranges by construction and cannot show once the wor
 
 [Agents](#12-agents) is one profile: the one this method was written for. It has not been run — no project has yet worked to this method — so it illustrates a design rather than a practice, and this document is what binds.
 
-## The Owner does not operate the tracker {rule}
+## The Owner does not operate the tracker · *Rule*
 
 Every item, classification, link, release and reopening is performed by an agent. The Owner reads, judges, and instructs in words.
 
@@ -251,7 +251,7 @@ A rule whose enforcement depends on the Owner remembering a convention is a defe
 
 *Four things exist. Everything else a tracker shows is a rendering over them — the last of the eight invariants says so.*
 
-## Four things exist {rule}
+## Four things exist · *Rule*
 
 Nothing else is an artifact, and anything a project keeps beside these four is either one of them under a different name or a fact with no home.
 
@@ -289,7 +289,7 @@ None of the five is a lighter path. Each passes every station and each writes it
 
 A container is closed by none of them. A feature is emptied: its last child leaves by one of the five acts, or is detached or promoted away, and the party whose act left it empty closes it on the spot. A release is membership rather than parentage, so it does not empty: it closes on the Owner's word once its content has shipped and its census report and conformance ruling are on it. Both are transitions rather than a sixth act, [Automation](#9-automation) owns how each is performed, and neither writes a ledger line — the ledger prices acts, and closing a container is not one.
 
-## The feature is the plan {rule}
+## The feature is the plan · *Rule*
 
 There is no plan document. A feature's item states the goal, the boundary, the tasks it decomposes into, and their order. The plan ruling is passed on that item, and work begins only after it.
 
@@ -311,7 +311,7 @@ So the list is spent rather than deleted, and what remains of it is the feature'
 > [!WHY]
 > A plan kept beside the tracker diverges from it, and nothing compares the two, so the divergence produces no signal. Keeping the plan in the object it plans makes divergence impossible rather than merely discouraged.
 
-## The evidence package is a closed form {rule}
+## The evidence package is a closed form · *Rule*
 
 This is the artifact the Owner reads instead of the diff, so it is specified to the same standard as the ledger line and not one word looser. Six lines, named, in this order. A package missing a line is incomplete, and the item does not close.
 
@@ -329,7 +329,7 @@ The verifier appends `Verdict` and nothing else: passed, or the finding and its 
 > [!WHY]
 > Confidence is extended to a result nobody read line by line, and the package is the entire basis for extending it. Left to judgement, it comes out a different shape every time, and by the fifth one the Owner is reading five documents to find one fact — at the station the method says cannot absorb noise. The rational response to that is to read the diff instead, and at that moment the method has become a filing convention.
 
-## Independence is recorded, or it is not independence {rule}
+## Independence is recorded, or it is not independence · *Rule*
 
 The `Parties` line exists because the method's central claim is checkable only if the arrangement it describes leaves a trace. A verifier who did not write the change is worth nothing after the fact if nothing says who wrote it.
 
@@ -337,7 +337,7 @@ Where the parties are agents, the line names the model family each ran under, so
 
 A profile that cannot make its parties distinguishable states what it substitutes, in the package, on every item. The session each party ran in is never among what is substituted — every session can name itself, and it is the one fact the fourth separation is checked against. A blank there is a defect, and it is the defect that quietly voids every other check.
 
-## Provenance runs in both directions, and is derived {rule}
+## Provenance runs in both directions, and is derived · *Rule*
 
 Nothing is traced by keeping a trace. Every link in the chain already exists for its own reason, so the chain is a query and cannot go stale.
 
@@ -345,7 +345,7 @@ Forward: a wish becomes a goal, the goal becomes a feature, the feature's checkl
 
 A tracker that cannot walk that chain in both directions has not bound the method — [Mapping](#10-mapping) states it as a requirement on the binding rather than a hope about the platform.
 
-## Every artifact has one writer {rule}
+## Every artifact has one writer · *Rule*
 
 Nothing is co-authored. For each artifact exactly one party writes it, and the moment of writing is fixed rather than left to judgement.
 
@@ -364,13 +364,13 @@ Nothing is co-authored. For each artifact exactly one party writes it, and the m
 > [!EXCEPTION]
 > **There is one exception.** The verifier appends its verdict to the evidence package. It is the only case of a second writer, and it is append-only — the verifier never edits what the executor wrote.
 
-## Lifetimes differ, and the difference is load-bearing {principle}
+## Lifetimes differ, and the difference is load-bearing · *Principle*
 
 Confusing a durable record with a disposable one is what turns a tracker into a dumping ground. Each artifact has a defined end.
 
 ![Task lives until merge, feature until its last child leaves, evidence package as long as its item, ledger forever.](diagrams/artifact-lifetimes.svg "The evidence package outlives the work it describes, because the Owner may read it long after. The ledger outlives everything, because a forecast is built from history.")
 
-## Session residue is written on the task {rule}
+## Session residue is written on the task · *Rule*
 
 An executor that stops mid-task leaves behind the approaches it already tried and abandoned. That record — the handoff — is written as a comment on the task, and it dies with the task. When the task splits, the remainder is filed with it copied across, because the dead ends belong to the work and not to the number.
 
@@ -396,11 +396,11 @@ It is not promoted to an artifact because it has no reader beyond the next sessi
 
 ![Four stages in a band, fanning at verification into five closing acts, with acceptance sitting after and gating nothing.](diagrams/item-lifecycle.svg "The fan is the point. Everything upstream of the verification is one path; what an item closes on depends on what it produced, and acceptance sits outside the flow entirely.")
 
-## A stage is a passage, not a status {rule}
+## A stage is a passage, not a status · *Rule*
 
 No stage is recorded anywhere. Framing is an item whose body carries no `Goal`; Planning is a `Goal` with no child items; Execution is an open branch or pull request; Verification is a pull request carrying an evidence package; Closing is the closing act; Acceptance is a closed item newer than the review mark. A stage that cannot be read off a fact the tracker already holds is not a stage in this method.
 
-## Every kind runs this cycle, and they differ at two points only {rule}
+## Every kind runs this cycle, and they differ at two points only · *Rule*
 
 There is one cycle, not six. What changes between a feature, a bug and a research question is where the work enters it and what act closes it — everything between those two points is identical, and identical on purpose: the stations are what make a result trustworthy, and no kind of work is exempt from them because it looked small.
 
@@ -420,7 +420,7 @@ Where a bug or a chore enters at Execution, it is because framing already happen
 > [!WHY]
 > A method that gave small work a shorter path would be read as a method that grades work by size, and everything would then arrive small. The path is one path; what differs is the act that ends it, and that is a property of what the work produced rather than of how much it was worth.
 
-## Framing ends with one sentence {rule}
+## Framing ends with one sentence · *Rule*
 
 Framing is finished when the goal names an observable end state and survives one test: write down two plausible readings, and if they would produce different acceptance criteria, it is not finished.
 
@@ -438,7 +438,7 @@ Framing has two scales, like everything here. A wish that outgrows one feature g
 > [!WHY]
 > A framing error fails last. The plan is faithful to the misreading, the implementation is faithful to the plan, and every check confirms that faithfulness — so the error is first detectable at acceptance, after every token is spent, by the one guardian whose attention the method exists to protect.
 
-## Planning resolves uncertainty first {rule}
+## Planning resolves uncertainty first · *Rule*
 
 The feature is decomposed so that each task makes the next one specifiable: the first task is the one resolving the largest uncertainty a task can resolve. An uncertainty that is a question resolves as research instead — filed flat, blocking the feature by link.
 
@@ -450,11 +450,11 @@ That payload is written at planning, into the feature's body under each checklis
 
 The plan is argued before it is priced. The plan ruling is what Planning passes on, and a deeper adversarial pass is bought only where a wrong approach would surface after implementation rather than during it. If two approaches that would have to be chosen between cannot be named, there is nothing for that pass to converge on, and running it anyway produces an endorsement the plan did not earn.
 
-## Execution is one session against one item {rule}
+## Execution is one session against one item · *Rule*
 
 The executor receives the task's item, the repository's standing instructions, and the handoff if one was written on the item — nothing else, because nothing else survives between sessions. Every technical decision is the executor's, recorded in the evidence package with the alternatives that existed; anything product-level, any change to the criteria, any breach of the boundary, and any new external dependency is escalated to the item while the code is still unwritten.
 
-## A discovery is filed now and done next {rule}
+## A discovery is filed now and done next · *Rule*
 
 Work discovered mid-task is filed at the moment of the discovery, and never folded into the running pull request. Inside the boundary it belongs to this pull request and is not a discovery at all; outside it — or ambiguous — the routing test gives it its place.
 
@@ -464,7 +464,7 @@ The discoverer files, and the separations decide who does the work.
 
 Conditional work waits longer, on its Trigger line — [Classification](#7-classification) owns that rule. A limitation accepted for good is not filed at all: it is recorded beside the code it describes.
 
-## A task that outgrows one pull request splits {rule}
+## A task that outgrows one pull request splits · *Rule*
 
 A task that turns out to be bigger than one pull request is not one task. The executor stops and says so, and the Feature Lead splits it — the boundary is that accountability's line to write — never delivered large with an apology in the description.
 
@@ -472,7 +472,7 @@ A task blocked mid-flight splits the same way: the pull request narrows to the s
 
 A second pull request on one task is never the answer — it is a decomposition error, and it is analysed like one.
 
-## Verification runs cheapest first {rule}
+## Verification runs cheapest first · *Rule*
 
 No check forwards what an earlier check could have caught. Scripts run first and cost nothing but machine time; the verification runs on tokens against a change that already passes its tests; the Owner reads last, and only what the first two could not have judged.
 
@@ -483,7 +483,7 @@ A verification finding has three dispositions: fixed in this task, filed with an
 
 A filed finding follows the discovery rule: it is work found in flight, first in line after the merge, never parked.
 
-## The verification can refuse {rule}
+## The verification can refuse · *Rule*
 
 Refusal is the disposition for a finding that filing cannot answer: the change does what it was asked to do, and what it was asked to do is wrong. A verifier that can only fix or file cannot stop anything, and a station that cannot stop anything is not a station.
 
@@ -500,7 +500,7 @@ A refusal is never overridden. The Owner may reopen the feature and instruct dif
 > [!WHY]
 > Two dispositions make every finding survivable by filing it, and filing is free. The one class of defect that must stop a merge — the approach itself being wrong — is exactly the class filing handles worst, because the item it files against is built on the thing it disputes. Without a refusal the verification is a comment, the check count is three where it is two, and the confidence the Owner is asked to extend rests on a station that was never able to withhold it.
 
-## The merge closes, and nobody waits {rule}
+## The merge closes, and nobody waits · *Rule*
 
 On green gates and a verification that did not refuse, the pull request merges and the task closes with the merge. The evidence package is written before the verification and posted on the item no later than the merge, so the closed item carries it; the executor that merged the last task closes the feature, reading its `Ship condition` against what shipped as it goes.
 
@@ -509,7 +509,7 @@ A task is never reopened — it records what became of one pull request, merged 
 > [!WHY]
 > Holding a verified branch open for a human puts a wait on the critical path of every change, including every change that would have been approved without comment. The trunk stays deployable because unfinished work merges behind a switch in the code — which is also what makes interruption affordable.
 
-## Acceptance is retrospective {rule}
+## Acceptance is retrospective · *Rule*
 
 The Owner reads the evidence package after the work has closed, at a time of their choosing. Nothing waits for the reading, and no state is held open pending it.
 
@@ -520,7 +520,7 @@ Reopening is the method working, not the method failing.
 > [!WHY]
 > A check that held the merge would pay the full wait on every change, including all the ones that turn out to be fine. The reopen cost is paid only on the ones that are not, and the unread limit is what keeps that cost bounded.
 
-## Starting is governed by the unread queue {rule}
+## Starting is governed by the unread queue · *Rule*
 
 Work is started by how much is waiting to be read by the Owner, never by how many agents are available. The unread limit is two closed-but-unread results and one task in flight; nothing new starts while the queue is at it — not a smaller task, not an unrelated one, not "to keep an agent busy".
 
@@ -539,7 +539,7 @@ Three streams qualify. Several independent attempts at one task add one result f
 
 Work whose whole verification is the test suite — a codemod, a dependency bump — never reaches the Owner at all, and research delivers a conclusion rather than a diff.
 
-## An incident displaces, and leaves a handoff {rule}
+## An incident displaces, and leaves a handoff · *Rule*
 
 An urgent item enters flat: no parent, no home, framing skipped because the outage states the goal. It does not queue behind the starting limit — restoring service is not discretionary — but it takes the in-flight slot, and its change is verified, merged and read like any other.
 
@@ -555,7 +555,7 @@ The interrupted session ends, and everything held only in it is lost. Before the
 
 *Eight properties hold in every valid state of the tracker, and a structure that violates one is a defect, whoever produced it. The consistency check rules on what the tracker shows; a violation it cannot see is still a violation.*
 
-## The eight invariants {rule}
+## The eight invariants · *Rule*
 
 A structure that breaks one of these is defective, whoever produced it and however green everything else reads.
 
@@ -570,7 +570,7 @@ One fact, one home — nothing is recorded in two places.
 Items, their classification and their state are the source of truth — every board, view and chart is a rendering, deletable and rebuildable without loss.
 ```
 
-## History before a rule does not refute it {rule}
+## History before a rule does not refute it · *Rule*
 
 Two corpora have been counted against invariant 1, and both report it true of most work rather than all: 3 of 22 pull-request-closed items in one, 17 of 250 in the other. Neither count is a counter-example, and the reason is not a defence of the invariant but a fact about the measurement.
 
@@ -580,7 +580,7 @@ This is stated here rather than left for a reader to rediscover, because the num
 
 The same holds for every count in the evidence base taken before its rule existed. When work produced *under* the convention breaks an invariant, that is a different thing entirely, and it enters the analysis a bug gets.
 
-## Two live levels {rule}
+## Two live levels · *Rule*
 
 The hierarchy is a feature and its tasks. Releases sit above as membership rather than parentage, holding what ships together; nothing sits below.
 
@@ -591,7 +591,7 @@ An item with no parent is a **flat item** — a bug, a chore, a research questio
 > [!WHY]
 > With no parent, a feature's tasks are related only by a prefix in their titles, and "what remains" stops being answerable except by reading. With a third level, every grouping view starts duplicating rows, and every added level is one more structure that must be kept true. Two is where both failures are avoided.
 
-## The last child closes its parent {rule}
+## The last child closes its parent · *Rule*
 
 A task's closure is forced by the platform: the merge closes it. A parent's closure is forced by nothing, so it is performed by the party at the event — whoever's act left it with no open child closes it, having answered the two questions [Automation](#9-automation) states.
 
@@ -600,20 +600,20 @@ That document owns the procedure. This invariant says only that the transition h
 > [!WHY]
 > Zombie parents are how hierarchies rot: every child done, the parent open, its progress reading as unfinished forever. The transition nothing forces is exactly the one that goes unperformed.
 
-## A deferred task is promoted {rule}
+## A deferred task is promoted · *Rule*
 
 Deferring a task to a later release means promoting it to a feature there, or re-attaching it to a feature still open. It is never left on a parent that shipped.
 
 A shipped feature with an open child reports false progress permanently. The record of what a release contained is the one history the tracker holds, and an orphan falsifies it.
 
-## One fact, one home {rule}
+## One fact, one home · *Rule*
 
 Any fact lives in exactly one primitive. The plan lives in the feature, the type lives in its classification, the state lives in the item — and no fact is recorded twice.
 
 > [!WHY]
 > The tracker never compares two copies of a fact, so they diverge silently and every consumer trusts a different one. The failure produces no signal until a decision lands on the stale copy.
 
-## Ceilings are lower than limits {guide}
+## Ceilings are lower than limits · *Guide*
 
 Every primitive stops communicating long before the platform stops permitting it. The method treats the useful ceiling as the limit, and the platform's number as irrelevant.
 
@@ -626,7 +626,7 @@ Every primitive stops communicating long before the platform stops permitting it
 
 Exceeding a ceiling raises no error. It produces a structure that is technically valid and no longer readable — a worse failure than an error, because nothing announces it.
 
-## The check runs, memory does not {rule}
+## The check runs, memory does not · *Rule*
 
 Every invariant is ruled on by the consistency check, never by anyone's intention. These eight describe a state rather than an act, so they ride no event of their own and nothing makes them visible as they break — and breaking one costs the breaker nothing, because a false rollup bills whoever reads it next.
 
@@ -638,7 +638,7 @@ The check runs on two events and reports — a release close, and every pass in 
 
 *Every term below is normative and binds every other document. A term is never translated — a locale translates the prose around it, and the term itself stays English on every page, in every language.*
 
-## The terms {rule}
+## The terms · *Rule*
 
 One term, one meaning, one line. A document using one of these words uses it in exactly this sense; a document needing a different sense needs a different word.
 
@@ -696,7 +696,7 @@ One term, one meaning, one line. A document using one of these words uses it in 
 | refusal | The verification's third disposition: the change does what was asked and what was asked is wrong. The pull request closes unmerged and the task closes `refused` |
 | conformance | The six statements a project meets to claim the method. The [Overview](#1-overview) owns them |
 
-## Terms are never translated {rule}
+## Terms are never translated · *Rule*
 
 The English term is the identifier, in every locale. Prose around it may be in any language; the word itself does not change, so a reader of any locale meets the same string the queries, the classifications and the other locales use.
 
@@ -711,7 +711,7 @@ The names an item's lines carry are terms of exactly this kind: `Goal`, `Framed`
 
 *Work is classified on four axes. An item carries exactly one type, at most one area and one priority, any number of independent flags — and every value is applied by an agent, never by the Owner.*
 
-## Four axes {rule}
+## Four axes · *Rule*
 
 An axis answers one question, and an item carries at most one of its values — the flags axis alone excepted, each flag being its own independent fact. An axis earns its place by answering a question that is actually asked, or by selecting a behaviour downstream; an axis that does neither is decoration with a maintenance cost.
 
@@ -731,7 +731,7 @@ There is no fifth axis. Status is derived, sizing is refused because the measure
 
 How an axis value is physically recorded — a label, a field, a native type — is the tracker's concern, and [Mapping](#10-mapping) settles it per tracker. Nothing in this document depends on the answer.
 
-## Routing {rule}
+## Routing · *Rule*
 
 The routing test routes every piece of work, asked at two scales: **does X ship without this?** Asked of a feature, no makes it a task under that feature. Asked of a release, no pulls it into that release — on the Owner's word, because what blocks a shipment is theirs to say.
 
@@ -768,7 +768,7 @@ An inquiry that produces work is that same research item — an audit, a teardow
 
 Work that is real only under a condition waits with a **Trigger** line naming that condition — filed, homeless, and untouched until the condition holds. A Trigger names an observable condition, in the same sense a goal names an observable end state: something can answer whether it has happened. An item whose Trigger nobody can name, or nobody can evaluate, is not waiting work — it is either work now, or nothing.
 
-## A bug names its provenance {rule}
+## A bug names its provenance · *Rule*
 
 A bug carries three lines in its body, each written by its own author at its own moment.
 
@@ -785,13 +785,13 @@ A bug does not close without its Origin line — filled, or honestly not: *preda
 > [!WHY]
 > These three lines are what makes the retrospective mechanical instead of archaeological. And the reverse half costs nothing where the binding supplies the mirrored link: a closed feature then accumulates the record of what it left behind — derived, never maintained.
 
-## A label is an axis, a link is a fact {rule}
+## A label is an axis, a link is a fact · *Rule*
 
 A label carries a value from a small closed set that queries read constantly. A link carries a fact between two items — an origin, a blocker, a supersession.
 
 Encode a fact as a label — one label per feature that ever shipped a bug — and the axis loses its ceiling: the set grows with history rather than with the system, and every future filing pays selection cost over all of it. A fact encoded as a label is an axis without a ceiling; an axis encoded as links is a query that does not exist.
 
-## The values {rule}
+## The values · *Rule*
 
 The type axis is fixed at the six values above. The area axis is project-defined: each value names a place that can be pointed at — a value whose directories cannot be named is a topic, and topics belong in titles — and the axis is capped at eight values.
 
@@ -807,7 +807,7 @@ The *triage* flag marks an item an agent filed on its own initiative and left. T
 
 A discovery being done immediately after its task carries no triage: its evidence reaches the Owner through the unread queue.
 
-## The first words classify {guide}
+## The first words classify · *Guide*
 
 The opening words of an item's statement name its type. An agent filing work reads its own first words against this table before it reads anything else.
 
@@ -823,7 +823,7 @@ The opening words of an item's statement name its type. An agent filing work rea
 
 The verbs are specimens, not a fence: match the essence in the middle of each row, never the letter. A statement matching two rows is two items unsplit; one matching none is framing unfinished — and in both cases the routing rule, not this table, decides.
 
-## Governance {rule}
+## Governance · *Rule*
 
 Addition is costly and removal is cheap, by design. A new value replaces an existing one in its axis; a new axis replaces an axis. The one exception is the area axis, which grows without a swap while the codebase grows a genuinely new part, until the cap.
 
@@ -839,7 +839,7 @@ The census — [Automation](#9-automation) owns it — carries this axis's half:
 
 *Tokens are the one input that is spent and does not return — and the one quantity that is measured rather than guessed. Every rule here exists to keep that measurement honest.*
 
-## Spend is recorded, cost is computed {rule}
+## Spend is recorded, cost is computed · *Rule*
 
 The ledger records spend — token counts, the model, and the date. Cost is computed at the moment of asking, from the price in effect on that date, and a computed cost is never stored.
 
@@ -848,7 +848,7 @@ Prices live in a dated table beside the ledger — the same record, extended whe
 > [!WHY]
 > Prices change on announced dates. A cost stored at close is a fact about the day it was frozen: the same spend has two honest answers on two sides of a price change, and only a stored number can be wrong about both.
 
-## The ledger has one writer {rule}
+## The ledger has one writer · *Rule*
 
 The closing agent appends one line per closing act, at the moment of the close. Never by hand, never by the Owner, and an existing line is never edited.
 
@@ -865,7 +865,7 @@ Runs — per model and effort, the token counts read from where the execution pr
 > [!WHY]
 > A ledger maintained by discipline decays the way every maintained answer decays — silently. The close is an event that already happens, carried by an agent already acting, so the write has a forcing function instead of a memory.
 
-## Abandoned work stays visible {rule}
+## Abandoned work stays visible · *Rule*
 
 A closed item that merged nothing still gets its line, and its `Outcome` says which act closed it. That distinction is not bookkeeping: `refused` is a station exercising the power the method gave it, `withdrawn` is the Owner cancelling work, and a ledger that wrote one value for both could not tell how often the verification has ever refused — which is the only record of whether the method's newest station has fired at all.
 
@@ -873,7 +873,7 @@ The forecasting unit is **cost per merged task**: every line feeds the numerator
 
 A task that took three attempts to land is visibly more expensive than one that landed first try. Averaging only the merged lines reports the cheaper, false number, and the variance a forecast exists to expose is smoothed away before anyone looks.
 
-## A forecast is segmented and recency-weighted {rule}
+## A forecast is segmented and recency-weighted · *Rule*
 
 A forecast is computed per model, never blended across them. Spend on two models averages into a figure with two price tables and two efficiency profiles behind it — a number describing no model that exists, offered about a next task that will run on one specific model.
 
@@ -887,7 +887,7 @@ The decay half-life is a stated knob, not a constant; the default is seven month
 
 *Every answer the method gives is obtained one of three ways — a gate enforces it, a query derives it, or a judgement supplies it. Confusing the three is how tracking systems rot, so the boundary is drawn here and everything is on one side of it.*
 
-## Three categories {rule}
+## Three categories · *Rule*
 
 Every answer the method gives is obtained one of three ways, and a project that cannot say which way it got one is maintaining it by memory.
 
@@ -895,7 +895,7 @@ Every answer the method gives is obtained one of three ways, and a project that 
 
 Human names where the judgement originates, never whose hands perform the write. The Owner does not operate the tracker, so an agent performs every mutation — including the one that records the Owner's decision — and the verifier's verdict is Human too: reasoning about content is judgement, whichever party holds it.
 
-## No transition is automated {rule}
+## No transition is automated · *Rule*
 
 The platform forces a task closed at its merge. A container's closure is forced by nothing — and the answer is not a machine watching for it, but the party already standing at the moment it becomes true.
 
@@ -919,7 +919,7 @@ To reopen — a feature reopens on the Owner's word alone, and a task never does
 > [!WHY]
 > An automation here would be watching for a state a party already has in hand, and it would be the only thing in the method running when nobody asked it to. The transition was never hard to perform; it was hard to *remember*, and an event with an actor solves remembering without adding a machine that can fail silently in a quiet repository.
 
-## Three automations are never built {rule}
+## Three automations are never built · *Rule*
 
 Three machines are refused outright, and the refusals hold for anything shaped like them.
 
@@ -929,13 +929,13 @@ A **stale bot** converts Owner inactivity into item invalidity, and no clock can
 
 **Any writer sharing a field with a human.** Where automation and a person set the same value they eventually disagree, and the automation wins by being tireless — the bot re-applies what the human just removed until the human turns it off. Automation writes fields no human touches, and nothing else; that constraint binds every future automation, not just these three.
 
-## The middle of an item's life belongs to nobody {principle}
+## The middle of an item's life belongs to nobody · *Principle*
 
 Reliable enforcement exists at exactly two moments: creation and close. Between them no event fires, nothing compares recorded state to reality, and any fact written there is maintained by memory alone.
 
 This is not a gap left unclosed — it is the reason state is derived rather than kept. What cannot be maintained honestly is not maintained at all.
 
-## Each check rides its own event {rule}
+## Each check rides its own event · *Rule*
 
 The consistency check over the [Invariants](#5-invariants) and the census each ride an event that has an actor — never a schedule and never a memory. Each surfaces a decision: retire the value, promote the task, prune the link. The surfacing is derived; the decision stays with the Owner.
 
@@ -971,7 +971,7 @@ Every run of the consistency check lists the invariants broken since its last on
 
 *The method's objects are not platform features, so they survive a change of tracker. A binding says which native primitive carries each one — and what it deliberately leaves unused.*
 
-## What a binding supplies {rule}
+## What a binding supplies · *Rule*
 
 A tracker may bind the method only if it supplies all of these; anything it lacks, the binding states as lacking rather than approximates.
 
@@ -988,7 +988,7 @@ A record that survives the work — the evidence package and its verdict stay re
 
 A primitive the method does not use is left untouched, never repurposed. An unused field costs nothing; a repurposed one carries someone else's semantics into every query that reads it.
 
-## Two bindings in full {rule}
+## Two bindings in full · *Rule*
 
 These two are written out object by object because everything after them is stated as a difference from one of the two. Each row fixes one object to one native primitive, and a project on either tracker uses the column as written.
 
@@ -1021,7 +1021,7 @@ Everything after them is stated as a difference, and each opens by naming which 
 | Linear | GitHub for closure, Jira for the axes | Cycles are a time box and stay unused |
 | YouTrack | Jira | It will model anything, including the method wrongly |
 
-## GitHub {rule}
+## GitHub · *Rule*
 
 On GitHub every axis is carried by labels. That is forced rather than chosen, because the platform's structured type primitive exists only for organisations. On a personal account there is no alternative an automation token can read, which is why label discipline is structure rather than hygiene; if the repository ever moves to an organisation, the migration is mechanical — read each issue's single `type/` label, set the type, delete the label.
 
@@ -1031,7 +1031,7 @@ Everything else is native. Sub-issues carry containment and the rollup, `Closes 
 
 A release's bytes are whatever `main` holds at its tag — membership in the milestone records the commitment, and the changelog derives from the merges between two tags. A bug's `Origin: #N` line needs no machinery at all: the platform mirrors every body link onto the target's timeline, so the feature's page carries its own after-history unasked.
 
-## Jira {rule}
+## Jira · *Rule*
 
 Where GitHub puts every axis in a label, Jira gives each one a field of its own: issue type carries type, Component carries area, Priority is its own field, and labels are left to the flags alone. There is no naming convention to keep and no colour to read, because the platform enforces one value per field without being asked.
 
@@ -1045,7 +1045,7 @@ Two things this binding states as lacking rather than approximates.
 
 **A blocking link outlives its blocker.** The link stays after the blocker closes, so the ready queue cannot be "open and unblocked" as a plain link query; it is open, minus those whose blockers are still open. The fact is recoverable and the query is one clause longer — but it is a query the other bindings do not need, and it is stated here rather than discovered later.
 
-## GitLab {rule}
+## GitLab · *Rule*
 
 Read the GitHub column and change almost nothing. `Closes #N` in a merge request closes its issue at merge, a milestone carries the release, labels carry the axes with the same `axis/value` naming, and mentions mirror onto their target.
 
@@ -1057,7 +1057,7 @@ What differs is not shape but tier. **Epics, blocking dependencies and scoped la
 
 So on a free tier this binding states two of the eight as lacking, and two lacking is not a binding. On a tier that carries them, GitLab binds the method as completely as GitHub does, and the scoped labels make it stricter — the platform refuses a second value on one axis instead of leaving it to a colour convention.
 
-## Azure DevOps CMMI {rule}
+## Azure DevOps CMMI · *Rule*
 
 Read the Jira column: the axes have native homes here too. Area dissolves into Area Path, priority into the Priority field, and only type and the flags need tags — so the label discipline shrinks the same way, and for the same reason.
 
@@ -1067,7 +1067,7 @@ An Iteration Path serves as the release with its dates left empty: the platform 
 
 CMMI arrives with more machinery than the method consumes — Change Request, Risk, Review, the estimate fields, a state machine with a Resolved stage. All of it stays unused, and that is the binding's defining feature rather than a footnote: state is derived here as everywhere, the rollup answers progress, and no hand moves a work item across a board.
 
-## Linear {rule}
+## Linear · *Rule*
 
 Read GitHub for closure and Jira for the axes. A merged pull request closes its issue through the native integration, and priority is a field rather than a label, as it is in Jira.
 
@@ -1075,7 +1075,7 @@ The one thing to get right is the release. **A Cycle is a time box, and the meth
 
 Everything else lands cleanly: sub-issues carry containment and its rollup, blocking relations are native and queryable, comments outlive the work, and the API is a write path an agent can hold. Of the four bindings stated here it is the one that asks for the fewest caveats.
 
-## YouTrack {rule}
+## YouTrack · *Rule*
 
 Read Jira, and expect the same shape with more of it configurable: the axes are custom fields, so type, area, priority and the flags each get a field rather than sharing a label namespace, and a Version-like field carries the release.
 
@@ -1083,7 +1083,7 @@ That configurability is the caution. **A tracker that will model anything will l
 
 Closure rides commit commands and the VCS integration, which puts it in the same position as Jira: it works, and it is configuration rather than a property of the platform. The binding is incomplete until that configuration exists.
 
-## What is behind each of these {guide}
+## What is behind each of these · *Guide*
 
 Six bindings laid out in a table read as six tested arrangements. They are not, and saying so where a reader meets them costs one paragraph.
 

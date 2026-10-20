@@ -4,7 +4,7 @@ tagline: the ledger, the cost model, and what a forecast is worth
 lead: Tokens are the one input that is spent and does not return — and the one quantity that is measured rather than guessed. Every rule here exists to keep that measurement honest.
 ---
 
-## Spend is recorded, cost is computed {rule}
+## Spend is recorded, cost is computed · *Rule*
 
 The ledger records spend — token counts, the model, and the date. Cost is computed at the moment of asking, from the price in effect on that date, and a computed cost is never stored.
 
@@ -13,7 +13,7 @@ Prices live in a dated table beside the ledger — the same record, extended whe
 > [!WHY]
 > Prices change on announced dates. A cost stored at close is a fact about the day it was frozen: the same spend has two honest answers on two sides of a price change, and only a stored number can be wrong about both.
 
-## The ledger has one writer {rule}
+## The ledger has one writer · *Rule*
 
 The closing agent appends one line per closing act, at the moment of the close. Never by hand, never by the Owner, and an existing line is never edited.
 
@@ -30,7 +30,7 @@ Runs — per model and effort, the token counts read from where the execution pr
 > [!WHY]
 > A ledger maintained by discipline decays the way every maintained answer decays — silently. The close is an event that already happens, carried by an agent already acting, so the write has a forcing function instead of a memory.
 
-## Abandoned work stays visible {rule}
+## Abandoned work stays visible · *Rule*
 
 A closed item that merged nothing still gets its line, and its `Outcome` says which act closed it. That distinction is not bookkeeping: `refused` is a station exercising the power the method gave it, `withdrawn` is the Owner cancelling work, and a ledger that wrote one value for both could not tell how often the verification has ever refused — which is the only record of whether the method's newest station has fired at all.
 
@@ -38,7 +38,7 @@ The forecasting unit is **cost per merged task**: every line feeds the numerator
 
 A task that took three attempts to land is visibly more expensive than one that landed first try. Averaging only the merged lines reports the cheaper, false number, and the variance a forecast exists to expose is smoothed away before anyone looks.
 
-## A forecast is segmented and recency-weighted {rule}
+## A forecast is segmented and recency-weighted · *Rule*
 
 A forecast is computed per model, never blended across them. Spend on two models averages into a figure with two price tables and two efficiency profiles behind it — a number describing no model that exists, offered about a next task that will run on one specific model.
 

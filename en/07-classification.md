@@ -4,7 +4,7 @@ tagline: the four axes, and where every kind of work is routed
 lead: Work is classified on four axes. An item carries exactly one type, at most one area and one priority, any number of independent flags — and every value is applied by an agent, never by the Owner.
 ---
 
-## Four axes {rule}
+## Four axes · *Rule*
 
 An axis answers one question, and an item carries at most one of its values — the flags axis alone excepted, each flag being its own independent fact. An axis earns its place by answering a question that is actually asked, or by selecting a behaviour downstream; an axis that does neither is decoration with a maintenance cost.
 
@@ -24,7 +24,7 @@ There is no fifth axis. Status is derived, sizing is refused because the measure
 
 How an axis value is physically recorded — a label, a field, a native type — is the tracker's concern, and [Mapping](10-mapping.md) settles it per tracker. Nothing in this document depends on the answer.
 
-## Routing {rule}
+## Routing · *Rule*
 
 The routing test routes every piece of work, asked at two scales: **does X ship without this?** Asked of a feature, no makes it a task under that feature. Asked of a release, no pulls it into that release — on the Owner's word, because what blocks a shipment is theirs to say.
 
@@ -61,7 +61,7 @@ An inquiry that produces work is that same research item — an audit, a teardow
 
 Work that is real only under a condition waits with a **Trigger** line naming that condition — filed, homeless, and untouched until the condition holds. A Trigger names an observable condition, in the same sense a goal names an observable end state: something can answer whether it has happened. An item whose Trigger nobody can name, or nobody can evaluate, is not waiting work — it is either work now, or nothing.
 
-## A bug names its provenance {rule}
+## A bug names its provenance · *Rule*
 
 A bug carries three lines in its body, each written by its own author at its own moment.
 
@@ -78,13 +78,13 @@ A bug does not close without its Origin line — filled, or honestly not: *preda
 > [!WHY]
 > These three lines are what makes the retrospective mechanical instead of archaeological. And the reverse half costs nothing where the binding supplies the mirrored link: a closed feature then accumulates the record of what it left behind — derived, never maintained.
 
-## A label is an axis, a link is a fact {rule}
+## A label is an axis, a link is a fact · *Rule*
 
 A label carries a value from a small closed set that queries read constantly. A link carries a fact between two items — an origin, a blocker, a supersession.
 
 Encode a fact as a label — one label per feature that ever shipped a bug — and the axis loses its ceiling: the set grows with history rather than with the system, and every future filing pays selection cost over all of it. A fact encoded as a label is an axis without a ceiling; an axis encoded as links is a query that does not exist.
 
-## The values {rule}
+## The values · *Rule*
 
 The type axis is fixed at the six values above. The area axis is project-defined: each value names a place that can be pointed at — a value whose directories cannot be named is a topic, and topics belong in titles — and the axis is capped at eight values.
 
@@ -100,7 +100,7 @@ The *triage* flag marks an item an agent filed on its own initiative and left. T
 
 A discovery being done immediately after its task carries no triage: its evidence reaches the Owner through the unread queue.
 
-## The first words classify {guide}
+## The first words classify · *Guide*
 
 The opening words of an item's statement name its type. An agent filing work reads its own first words against this table before it reads anything else.
 
@@ -116,7 +116,7 @@ The opening words of an item's statement name its type. An agent filing work rea
 
 The verbs are specimens, not a fence: match the essence in the middle of each row, never the letter. A statement matching two rows is two items unsplit; one matching none is framing unfinished — and in both cases the routing rule, not this table, decides.
 
-## Governance {rule}
+## Governance · *Rule*
 
 Addition is costly and removal is cheap, by design. A new value replaces an existing one in its axis; a new axis replaces an axis. The one exception is the area axis, which grows without a swap while the codebase grows a genuinely new part, until the cap.
 

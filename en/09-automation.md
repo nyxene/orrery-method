@@ -4,7 +4,7 @@ tagline: what is enforced, what is derived, and what must never be built
 lead: Every answer the method gives is obtained one of three ways — a gate enforces it, a query derives it, or a judgement supplies it. Confusing the three is how tracking systems rot, so the boundary is drawn here and everything is on one side of it.
 ---
 
-## Three categories {rule}
+## Three categories · *Rule*
 
 Every answer the method gives is obtained one of three ways, and a project that cannot say which way it got one is maintaining it by memory.
 
@@ -12,7 +12,7 @@ Every answer the method gives is obtained one of three ways, and a project that 
 
 Human names where the judgement originates, never whose hands perform the write. The Owner does not operate the tracker, so an agent performs every mutation — including the one that records the Owner's decision — and the verifier's verdict is Human too: reasoning about content is judgement, whichever party holds it.
 
-## No transition is automated {rule}
+## No transition is automated · *Rule*
 
 The platform forces a task closed at its merge. A container's closure is forced by nothing — and the answer is not a machine watching for it, but the party already standing at the moment it becomes true.
 
@@ -36,7 +36,7 @@ To reopen — a feature reopens on the Owner's word alone, and a task never does
 > [!WHY]
 > An automation here would be watching for a state a party already has in hand, and it would be the only thing in the method running when nobody asked it to. The transition was never hard to perform; it was hard to *remember*, and an event with an actor solves remembering without adding a machine that can fail silently in a quiet repository.
 
-## Three automations are never built {rule}
+## Three automations are never built · *Rule*
 
 Three machines are refused outright, and the refusals hold for anything shaped like them.
 
@@ -46,13 +46,13 @@ A **stale bot** converts Owner inactivity into item invalidity, and no clock can
 
 **Any writer sharing a field with a human.** Where automation and a person set the same value they eventually disagree, and the automation wins by being tireless — the bot re-applies what the human just removed until the human turns it off. Automation writes fields no human touches, and nothing else; that constraint binds every future automation, not just these three.
 
-## The middle of an item's life belongs to nobody {principle}
+## The middle of an item's life belongs to nobody · *Principle*
 
 Reliable enforcement exists at exactly two moments: creation and close. Between them no event fires, nothing compares recorded state to reality, and any fact written there is maintained by memory alone.
 
 This is not a gap left unclosed — it is the reason state is derived rather than kept. What cannot be maintained honestly is not maintained at all.
 
-## Each check rides its own event {rule}
+## Each check rides its own event · *Rule*
 
 The consistency check over the [Invariants](05-invariants.md) and the census each ride an event that has an actor — never a schedule and never a memory. Each surfaces a decision: retire the value, promote the task, prune the link. The surfacing is derived; the decision stays with the Owner.
 

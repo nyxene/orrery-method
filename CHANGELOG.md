@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.4
+
+Force marks that read as words. A section heading ended in `{rule}`, which the
+site turned into a badge and every other reader — GitHub, or a tool reading the
+markdown — saw as markup. It is now `· *Rule*`, and Proven is `· *Rule, proven*`.
+The site is unchanged, and so is every sentence of the corpus but the one in
+Overview that shows how standing is written.
+
 ## 0.0.3
 
 The method is text. This repository holds the documents, their site and their

@@ -2,7 +2,7 @@
 
 > A way of running a software project where the work is done by AI agents, and one person directs, judges, and decides.
 
-Version 0.0.3 · MIT · https://github.com/nyxene/orrery-method
+Version 0.0.4 · MIT · https://github.com/nyxene/orrery-method
 
 ## Docs
 

@@ -4,7 +4,7 @@ tagline: two bindings in full, four more as their differences
 lead: The method's objects are not platform features, so they survive a change of tracker. A binding says which native primitive carries each one — and what it deliberately leaves unused.
 ---
 
-## What a binding supplies {rule}
+## What a binding supplies · *Rule*
 
 A tracker may bind the method only if it supplies all of these; anything it lacks, the binding states as lacking rather than approximates.
 
@@ -21,7 +21,7 @@ A record that survives the work — the evidence package and its verdict stay re
 
 A primitive the method does not use is left untouched, never repurposed. An unused field costs nothing; a repurposed one carries someone else's semantics into every query that reads it.
 
-## Two bindings in full {rule}
+## Two bindings in full · *Rule*
 
 These two are written out object by object because everything after them is stated as a difference from one of the two. Each row fixes one object to one native primitive, and a project on either tracker uses the column as written.
 
@@ -54,7 +54,7 @@ Everything after them is stated as a difference, and each opens by naming which 
 | Linear | GitHub for closure, Jira for the axes | Cycles are a time box and stay unused |
 | YouTrack | Jira | It will model anything, including the method wrongly |
 
-## GitHub {rule}
+## GitHub · *Rule*
 
 On GitHub every axis is carried by labels. That is forced rather than chosen, because the platform's structured type primitive exists only for organisations. On a personal account there is no alternative an automation token can read, which is why label discipline is structure rather than hygiene; if the repository ever moves to an organisation, the migration is mechanical — read each issue's single `type/` label, set the type, delete the label.
 
@@ -64,7 +64,7 @@ Everything else is native. Sub-issues carry containment and the rollup, `Closes 
 
 A release's bytes are whatever `main` holds at its tag — membership in the milestone records the commitment, and the changelog derives from the merges between two tags. A bug's `Origin: #N` line needs no machinery at all: the platform mirrors every body link onto the target's timeline, so the feature's page carries its own after-history unasked.
 
-## Jira {rule}
+## Jira · *Rule*
 
 Where GitHub puts every axis in a label, Jira gives each one a field of its own: issue type carries type, Component carries area, Priority is its own field, and labels are left to the flags alone. There is no naming convention to keep and no colour to read, because the platform enforces one value per field without being asked.
 
@@ -78,7 +78,7 @@ Two things this binding states as lacking rather than approximates.
 
 **A blocking link outlives its blocker.** The link stays after the blocker closes, so the ready queue cannot be "open and unblocked" as a plain link query; it is open, minus those whose blockers are still open. The fact is recoverable and the query is one clause longer — but it is a query the other bindings do not need, and it is stated here rather than discovered later.
 
-## GitLab {rule}
+## GitLab · *Rule*
 
 Read the GitHub column and change almost nothing. `Closes #N` in a merge request closes its issue at merge, a milestone carries the release, labels carry the axes with the same `axis/value` naming, and mentions mirror onto their target.
 
@@ -90,7 +90,7 @@ What differs is not shape but tier. **Epics, blocking dependencies and scoped la
 
 So on a free tier this binding states two of the eight as lacking, and two lacking is not a binding. On a tier that carries them, GitLab binds the method as completely as GitHub does, and the scoped labels make it stricter — the platform refuses a second value on one axis instead of leaving it to a colour convention.
 
-## Azure DevOps CMMI {rule}
+## Azure DevOps CMMI · *Rule*
 
 Read the Jira column: the axes have native homes here too. Area dissolves into Area Path, priority into the Priority field, and only type and the flags need tags — so the label discipline shrinks the same way, and for the same reason.
 
@@ -100,7 +100,7 @@ An Iteration Path serves as the release with its dates left empty: the platform 
 
 CMMI arrives with more machinery than the method consumes — Change Request, Risk, Review, the estimate fields, a state machine with a Resolved stage. All of it stays unused, and that is the binding's defining feature rather than a footnote: state is derived here as everywhere, the rollup answers progress, and no hand moves a work item across a board.
 
-## Linear {rule}
+## Linear · *Rule*
 
 Read GitHub for closure and Jira for the axes. A merged pull request closes its issue through the native integration, and priority is a field rather than a label, as it is in Jira.
 
@@ -108,7 +108,7 @@ The one thing to get right is the release. **A Cycle is a time box, and the meth
 
 Everything else lands cleanly: sub-issues carry containment and its rollup, blocking relations are native and queryable, comments outlive the work, and the API is a write path an agent can hold. Of the four bindings stated here it is the one that asks for the fewest caveats.
 
-## YouTrack {rule}
+## YouTrack · *Rule*
 
 Read Jira, and expect the same shape with more of it configurable: the axes are custom fields, so type, area, priority and the flags each get a field rather than sharing a label namespace, and a Version-like field carries the release.
 
@@ -116,7 +116,7 @@ That configurability is the caution. **A tracker that will model anything will l
 
 Closure rides commit commands and the VCS integration, which puts it in the same position as Jira: it works, and it is configuration rather than a property of the platform. The binding is incomplete until that configuration exists.
 
-## What is behind each of these {guide}
+## What is behind each of these · *Guide*
 
 Six bindings laid out in a table read as six tested arrangements. They are not, and saying so where a reader meets them costs one paragraph.
 

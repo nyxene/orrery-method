@@ -4,7 +4,7 @@ tagline: the four things that exist
 lead: Four things exist. Everything else a tracker shows is a rendering over them — the last of the eight invariants says so.
 ---
 
-## Four things exist {rule}
+## Four things exist · *Rule*
 
 Nothing else is an artifact, and anything a project keeps beside these four is either one of them under a different name or a fact with no home.
 
@@ -42,7 +42,7 @@ None of the five is a lighter path. Each passes every station and each writes it
 
 A container is closed by none of them. A feature is emptied: its last child leaves by one of the five acts, or is detached or promoted away, and the party whose act left it empty closes it on the spot. A release is membership rather than parentage, so it does not empty: it closes on the Owner's word once its content has shipped and its census report and conformance ruling are on it. Both are transitions rather than a sixth act, [Automation](09-automation.md) owns how each is performed, and neither writes a ledger line — the ledger prices acts, and closing a container is not one.
 
-## The feature is the plan {rule}
+## The feature is the plan · *Rule*
 
 There is no plan document. A feature's item states the goal, the boundary, the tasks it decomposes into, and their order. The plan ruling is passed on that item, and work begins only after it.
 
@@ -64,7 +64,7 @@ So the list is spent rather than deleted, and what remains of it is the feature'
 > [!WHY]
 > A plan kept beside the tracker diverges from it, and nothing compares the two, so the divergence produces no signal. Keeping the plan in the object it plans makes divergence impossible rather than merely discouraged.
 
-## The evidence package is a closed form {rule}
+## The evidence package is a closed form · *Rule*
 
 This is the artifact the Owner reads instead of the diff, so it is specified to the same standard as the ledger line and not one word looser. Six lines, named, in this order. A package missing a line is incomplete, and the item does not close.
 
@@ -82,7 +82,7 @@ The verifier appends `Verdict` and nothing else: passed, or the finding and its 
 > [!WHY]
 > Confidence is extended to a result nobody read line by line, and the package is the entire basis for extending it. Left to judgement, it comes out a different shape every time, and by the fifth one the Owner is reading five documents to find one fact — at the station the method says cannot absorb noise. The rational response to that is to read the diff instead, and at that moment the method has become a filing convention.
 
-## Independence is recorded, or it is not independence {rule}
+## Independence is recorded, or it is not independence · *Rule*
 
 The `Parties` line exists because the method's central claim is checkable only if the arrangement it describes leaves a trace. A verifier who did not write the change is worth nothing after the fact if nothing says who wrote it.
 
@@ -90,7 +90,7 @@ Where the parties are agents, the line names the model family each ran under, so
 
 A profile that cannot make its parties distinguishable states what it substitutes, in the package, on every item. The session each party ran in is never among what is substituted — every session can name itself, and it is the one fact the fourth separation is checked against. A blank there is a defect, and it is the defect that quietly voids every other check.
 
-## Provenance runs in both directions, and is derived {rule}
+## Provenance runs in both directions, and is derived · *Rule*
 
 Nothing is traced by keeping a trace. Every link in the chain already exists for its own reason, so the chain is a query and cannot go stale.
 
@@ -98,7 +98,7 @@ Forward: a wish becomes a goal, the goal becomes a feature, the feature's checkl
 
 A tracker that cannot walk that chain in both directions has not bound the method — [Mapping](10-mapping.md) states it as a requirement on the binding rather than a hope about the platform.
 
-## Every artifact has one writer {rule}
+## Every artifact has one writer · *Rule*
 
 Nothing is co-authored. For each artifact exactly one party writes it, and the moment of writing is fixed rather than left to judgement.
 
@@ -117,13 +117,13 @@ Nothing is co-authored. For each artifact exactly one party writes it, and the m
 > [!EXCEPTION]
 > **There is one exception.** The verifier appends its verdict to the evidence package. It is the only case of a second writer, and it is append-only — the verifier never edits what the executor wrote.
 
-## Lifetimes differ, and the difference is load-bearing {principle}
+## Lifetimes differ, and the difference is load-bearing · *Principle*
 
 Confusing a durable record with a disposable one is what turns a tracker into a dumping ground. Each artifact has a defined end.
 
 ![Task lives until merge, feature until its last child leaves, evidence package as long as its item, ledger forever.](../diagrams/artifact-lifetimes.svg "The evidence package outlives the work it describes, because the Owner may read it long after. The ledger outlives everything, because a forecast is built from history.")
 
-## Session residue is written on the task {rule}
+## Session residue is written on the task · *Rule*
 
 An executor that stops mid-task leaves behind the approaches it already tried and abandoned. That record — the handoff — is written as a comment on the task, and it dies with the task. When the task splits, the remainder is filed with it copied across, because the dead ends belong to the work and not to the number.
 

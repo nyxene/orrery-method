@@ -15,11 +15,11 @@ lead: Work passes six stages. Each hands a named artifact to the next, the Owner
 
 ![Four stages in a band, fanning at verification into five closing acts, with acceptance sitting after and gating nothing.](../diagrams/item-lifecycle.svg "The fan is the point. Everything upstream of the verification is one path; what an item closes on depends on what it produced, and acceptance sits outside the flow entirely.")
 
-## A stage is a passage, not a status {rule}
+## A stage is a passage, not a status · *Rule*
 
 No stage is recorded anywhere. Framing is an item whose body carries no `Goal`; Planning is a `Goal` with no child items; Execution is an open branch or pull request; Verification is a pull request carrying an evidence package; Closing is the closing act; Acceptance is a closed item newer than the review mark. A stage that cannot be read off a fact the tracker already holds is not a stage in this method.
 
-## Every kind runs this cycle, and they differ at two points only {rule}
+## Every kind runs this cycle, and they differ at two points only · *Rule*
 
 There is one cycle, not six. What changes between a feature, a bug and a research question is where the work enters it and what act closes it — everything between those two points is identical, and identical on purpose: the stations are what make a result trustworthy, and no kind of work is exempt from them because it looked small.
 
@@ -39,7 +39,7 @@ Where a bug or a chore enters at Execution, it is because framing already happen
 > [!WHY]
 > A method that gave small work a shorter path would be read as a method that grades work by size, and everything would then arrive small. The path is one path; what differs is the act that ends it, and that is a property of what the work produced rather than of how much it was worth.
 
-## Framing ends with one sentence {rule}
+## Framing ends with one sentence · *Rule*
 
 Framing is finished when the goal names an observable end state and survives one test: write down two plausible readings, and if they would produce different acceptance criteria, it is not finished.
 
@@ -57,7 +57,7 @@ Framing has two scales, like everything here. A wish that outgrows one feature g
 > [!WHY]
 > A framing error fails last. The plan is faithful to the misreading, the implementation is faithful to the plan, and every check confirms that faithfulness — so the error is first detectable at acceptance, after every token is spent, by the one guardian whose attention the method exists to protect.
 
-## Planning resolves uncertainty first {rule}
+## Planning resolves uncertainty first · *Rule*
 
 The feature is decomposed so that each task makes the next one specifiable: the first task is the one resolving the largest uncertainty a task can resolve. An uncertainty that is a question resolves as research instead — filed flat, blocking the feature by link.
 
@@ -69,11 +69,11 @@ That payload is written at planning, into the feature's body under each checklis
 
 The plan is argued before it is priced. The plan ruling is what Planning passes on, and a deeper adversarial pass is bought only where a wrong approach would surface after implementation rather than during it. If two approaches that would have to be chosen between cannot be named, there is nothing for that pass to converge on, and running it anyway produces an endorsement the plan did not earn.
 
-## Execution is one session against one item {rule}
+## Execution is one session against one item · *Rule*
 
 The executor receives the task's item, the repository's standing instructions, and the handoff if one was written on the item — nothing else, because nothing else survives between sessions. Every technical decision is the executor's, recorded in the evidence package with the alternatives that existed; anything product-level, any change to the criteria, any breach of the boundary, and any new external dependency is escalated to the item while the code is still unwritten.
 
-## A discovery is filed now and done next {rule}
+## A discovery is filed now and done next · *Rule*
 
 Work discovered mid-task is filed at the moment of the discovery, and never folded into the running pull request. Inside the boundary it belongs to this pull request and is not a discovery at all; outside it — or ambiguous — the routing test gives it its place.
 
@@ -83,7 +83,7 @@ The discoverer files, and the separations decide who does the work.
 
 Conditional work waits longer, on its Trigger line — [Classification](07-classification.md) owns that rule. A limitation accepted for good is not filed at all: it is recorded beside the code it describes.
 
-## A task that outgrows one pull request splits {rule}
+## A task that outgrows one pull request splits · *Rule*
 
 A task that turns out to be bigger than one pull request is not one task. The executor stops and says so, and the Feature Lead splits it — the boundary is that accountability's line to write — never delivered large with an apology in the description.
 
@@ -91,7 +91,7 @@ A task blocked mid-flight splits the same way: the pull request narrows to the s
 
 A second pull request on one task is never the answer — it is a decomposition error, and it is analysed like one.
 
-## Verification runs cheapest first {rule}
+## Verification runs cheapest first · *Rule*
 
 No check forwards what an earlier check could have caught. Scripts run first and cost nothing but machine time; the verification runs on tokens against a change that already passes its tests; the Owner reads last, and only what the first two could not have judged.
 
@@ -102,7 +102,7 @@ A verification finding has three dispositions: fixed in this task, filed with an
 
 A filed finding follows the discovery rule: it is work found in flight, first in line after the merge, never parked.
 
-## The verification can refuse {rule}
+## The verification can refuse · *Rule*
 
 Refusal is the disposition for a finding that filing cannot answer: the change does what it was asked to do, and what it was asked to do is wrong. A verifier that can only fix or file cannot stop anything, and a station that cannot stop anything is not a station.
 
@@ -119,7 +119,7 @@ A refusal is never overridden. The Owner may reopen the feature and instruct dif
 > [!WHY]
 > Two dispositions make every finding survivable by filing it, and filing is free. The one class of defect that must stop a merge — the approach itself being wrong — is exactly the class filing handles worst, because the item it files against is built on the thing it disputes. Without a refusal the verification is a comment, the check count is three where it is two, and the confidence the Owner is asked to extend rests on a station that was never able to withhold it.
 
-## The merge closes, and nobody waits {rule}
+## The merge closes, and nobody waits · *Rule*
 
 On green gates and a verification that did not refuse, the pull request merges and the task closes with the merge. The evidence package is written before the verification and posted on the item no later than the merge, so the closed item carries it; the executor that merged the last task closes the feature, reading its `Ship condition` against what shipped as it goes.
 
@@ -128,7 +128,7 @@ A task is never reopened — it records what became of one pull request, merged 
 > [!WHY]
 > Holding a verified branch open for a human puts a wait on the critical path of every change, including every change that would have been approved without comment. The trunk stays deployable because unfinished work merges behind a switch in the code — which is also what makes interruption affordable.
 
-## Acceptance is retrospective {rule}
+## Acceptance is retrospective · *Rule*
 
 The Owner reads the evidence package after the work has closed, at a time of their choosing. Nothing waits for the reading, and no state is held open pending it.
 
@@ -139,7 +139,7 @@ Reopening is the method working, not the method failing.
 > [!WHY]
 > A check that held the merge would pay the full wait on every change, including all the ones that turn out to be fine. The reopen cost is paid only on the ones that are not, and the unread limit is what keeps that cost bounded.
 
-## Starting is governed by the unread queue {rule}
+## Starting is governed by the unread queue · *Rule*
 
 Work is started by how much is waiting to be read by the Owner, never by how many agents are available. The unread limit is two closed-but-unread results and one task in flight; nothing new starts while the queue is at it — not a smaller task, not an unrelated one, not "to keep an agent busy".
 
@@ -158,7 +158,7 @@ Three streams qualify. Several independent attempts at one task add one result f
 
 Work whose whole verification is the test suite — a codemod, a dependency bump — never reaches the Owner at all, and research delivers a conclusion rather than a diff.
 
-## An incident displaces, and leaves a handoff {rule}
+## An incident displaces, and leaves a handoff · *Rule*
 
 An urgent item enters flat: no parent, no home, framing skipped because the outage states the goal. It does not queue behind the starting limit — restoring service is not discretionary — but it takes the in-flight slot, and its change is verified, merged and read like any other.
 

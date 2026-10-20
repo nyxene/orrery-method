@@ -14,7 +14,7 @@ lead: A method for software that agents write, that agents and automated gates c
 8 | invariants
 ```
 
-## What is scarce {principle}
+## What is scarce · *Principle*
 
 Implementation capacity is not the constraint. Agents produce changes faster than anyone can examine them, and adding more of them moves nothing.
 
@@ -25,7 +25,7 @@ Justified confidence is what those two buy: warranted trust in a result nobody r
 > [!WHY]
 > Optimising throughput in a system whose bottleneck is verification produces more unverified work, which is worth less than none: it still has to be examined, and now there is more of it.
 
-## Confidence is manufactured {principle}
+## Confidence is manufactured · *Principle*
 
 The Owner accepts a result they did not read because four independent checks stand around it — three before anything is built on it, one after. Each catches a class of failure the others cannot, and no two share a failure mode — because no two share a context. [Roles](02-roles.md) states the separation that delivers that; without it the checks are one judgement counted four times.
 
@@ -33,7 +33,7 @@ The Owner accepts a result they did not read because four independent checks sta
 
 Trust follows from the arrangement, not from any single verdict. [Roles](02-roles.md) states what each station catches and what disqualifies a party from holding it.
 
-## Derive, do not maintain {rule}
+## Derive, do not maintain · *Rule*
 
 Every answer is computed at the moment of asking, from state that exists for another reason.
 
@@ -44,7 +44,7 @@ Maintaining an answer is permitted only where derivation is impossible, and the 
 > [!WHY]
 > A status field is wrong from the moment reality moves, and it announces nothing. The same fact is already in the branch, the pull request and the merge — asking those costs one query and cannot lie.
 
-## What binds, and what does not {rule}
+## What binds, and what does not · *Rule*
 
 Every statement carries its force on its face. The badge beside a heading is the whole of its authority.
 
@@ -58,11 +58,11 @@ Unbadged prose explains. It binds nothing, and no tooling reads it.
 
 A badge is required wherever force exists and forbidden where it does not: every section of Method and Reference carries one, and no section of Practice does. Practice illustrates, so it has no force to declare, and a badge there would assert one. The build holds both halves of that.
 
-## Force and standing are different axes {rule}
+## Force and standing are different axes · *Rule*
 
 Force is what deviating costs. Standing is whether practice has confirmed the section yet. They are independent, and collapsing them into one badge is how a corpus stops binding anything.
 
-Every section carries a standing, and it is written where the force badge is. **Proven** — a real feature has been carried through it unchanged — is written as a second word: `{rule proven}`. **Pending** is the absence of that word, because it is the default and a default nobody has to write cannot drift out of date.
+Every section carries a standing, and it is written where the force badge is. **Proven** — a real feature has been carried through it unchanged — is written as a second word: `· *Rule, proven*`. **Pending** is the absence of that word, because it is the default and a default nobody has to write cannot drift out of date.
 
 Pending never softens force. A Pending Rule binds exactly as a Proven one does, and deviating from it is a defect, not a licensed experiment. What Pending adds is that the deviation is *also* evidence: it is filed as a bug against the corpus, its `Escaped` line naming the section that failed to hold.
 
@@ -71,7 +71,7 @@ Standing changes on an event, never on attention. The census at a release close 
 > [!WHY]
 > A corpus that marks itself unproven and licenses deviation on that ground can be adopted whole, obeyed nowhere, and reported as compliant. Marking the same fact without touching force keeps the honesty and removes the escape: the reader knows what has been tested, and owes the method the same obedience either way.
 
-## What conformance requires {rule}
+## What conformance requires · *Rule*
 
 A project conforms when all six hold. Nothing else is asked, and none of the six is waived by a section being Pending.
 
@@ -88,7 +88,7 @@ Each is checkable against the tracker and the repository, by someone who was not
 
 A project may take the parts it wants and leave the rest. What it may not do is take the parts and keep the name.
 
-## Conformance is ruled on, not asserted {rule}
+## Conformance is ruled on, not asserted · *Rule*
 
 A criterion nobody applies is a preference with a table around it, so the six are put to a party rather than left to the reader's conscience.
 
@@ -99,7 +99,7 @@ It holds until the next release close and no longer. Conformance is a statement 
 > [!WHY]
 > The moment conformance can be claimed without being ruled on, the claim costs nothing and means nothing, and the six criteria become decoration on a page nobody checks against. Riding the release close puts the ruling on an event that already has an actor, a record and an audience, so it is obeyed as a side effect of shipping rather than by anyone remembering to be honest.
 
-## The tracker holds four facts, and derives the rest {rule}
+## The tracker holds four facts, and derives the rest · *Rule*
 
 An item carries its body, its classification, its parent if it has one, and whether it is open or closed. Nothing else is stored about it, ever. Every question a board answers — what stage is this at, how far along is that, what is in progress — is computed from those four at the moment of asking.
 
@@ -114,7 +114,7 @@ There is no status field. Its absence is a decision this method is built on rath
 
 How the four are physically recorded — a label, a field, a native type, a link — is the tracker's business, settled per tracker in [Mapping](10-mapping.md). Nothing on this page depends on the answer, which is what lets the method outlive a change of tooling.
 
-## A rule rides an event, or it rides attention {principle}
+## A rule rides an event, or it rides attention · *Principle*
 
 A rule holds when it is attached to something that happens anyway and leaves a trace behind. The ledger rides the close, the handoff rides the interruption, the evidence package rides the merge: each is obeyed as a side effect of work already being done, and each neglect shows up as a missing artifact.
 
@@ -123,7 +123,7 @@ A rule attached to no event, or to an event that leaves nothing behind, is carri
 > [!WHY]
 > Human methods lean on habit and on a cost the breaker eventually feels. A party that begins each session with no memory has neither, so a norm here converts to structure or it evaporates. Adding a rule therefore begins with finding the event it can ride, never with wording it more firmly.
 
-## The boundary {rule}
+## The boundary · *Rule*
 
 The method covers one person directing agents against one codebase. Outside that it states nothing, and it does not extend by analogy.
 
@@ -139,7 +139,7 @@ The method covers one person directing agents against one codebase. Outside that
 
 Exclusion is not disapproval. These are answers to questions this method does not have.
 
-## How to read this {rule}
+## How to read this · *Rule*
 
 A document's part decides its force: **Method** is normative and read in order, once; **Reference** is looked up, never read through; **Practice** illustrates and binds nothing.
 
